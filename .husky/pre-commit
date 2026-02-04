@@ -1,0 +1,25 @@
+echo "🔍 Running pre-commit checks..."
+
+cd packages/frontend || exit 1
+
+echo "📝 Fixing TypeScript..."
+yarn eslint --fix "src/**/*.ts"
+
+echo "🎨 Fixing SCSS..."
+yarn  stylelint --fix "src/**/*.scss"
+
+echo "📄 Formatting HTML..."
+yarn  eslint --fix "src/**/*.html"
+yarn  prettier --write "src/**/*.html"
+
+echo "📦 Formatting JSON..."
+# Проверяем наличие JSON файлов
+if find src -name "*.json" -print -quit | grep -q .; then
+  yarn prettier --write "src/**/*.json"
+fi
+
+git add src/
+
+cd - > /dev/null
+
+echo "✅ Pre-commit checks passed!"
