@@ -1,8 +1,23 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, ErrorHandler, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
+import { materialConfigProviders } from './material/material.config';
+import { GlobalErrorHandlerService } from './core/global-error-handler/global-error-handler.service';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(
+      routes,
+      withViewTransitions(),
+      withComponentInputBinding(),
+    ),
+    { provide: LOCALE_ID, useValue: 'ru-RU' },
+    ...materialConfigProviders,
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandlerService,
+    }
+  ]
 };
