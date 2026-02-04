@@ -1,18 +1,23 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, inject, Injectable } from '@angular/core';
+import { ToastService } from '../toast-service/toast.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalErrorHandlerService implements ErrorHandler {
 
-  handleError(error: unknown): void {
+  private readonly toastService = inject(ToastService);
 
+  handleError(error: unknown): void {
+    let message = '';
     if (error instanceof HttpErrorResponse) {
-      const msg = this.getHttpErrorMessage(error);
-      console.error('Message from global error handler:', msg);
+      message = this.getHttpErrorMessage(error);
     }
-    console.error(error);
+
+    this.toastService.showError(message ? message : 'Ошибка!');
+
+    console.error('Message from global error handler:', error);
   }
 
   private getHttpErrorMessage(error: HttpErrorResponse): string {

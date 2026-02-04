@@ -1,0 +1,20 @@
+<div
+  class="toast"
+  [class]="messageType()"
+>
+  <mat-icon>
+    {{ icon() }}
+  </mat-icon>
+  <div class="toast-content">
+    <span class="toast-message">
+      {{ message() }}
+    </span>
+  </div>
+  <button
+    matIconButton
+    class="toast-close"
+    (click)="close()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
