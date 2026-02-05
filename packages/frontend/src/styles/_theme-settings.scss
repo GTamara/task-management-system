@@ -4,6 +4,17 @@
   @include mat.toolbar-overrides((
     container-background-color: var(--toolbar-gradient),
     standard-height: 52px,
-    mobile-height: 52px,
+    mobile-height: auto,
+  ));
+  @include mat.card-overrides((
+    elevated-container-color: var(--card-background),
+    title-text-line-height: 1,
+    title-text-font: var(--accent-font-family),
+    title-text-size: 1.1rem,
+    title-text-weight: 750,
+  ));
+  @include mat.tooltip-overrides((
+    container-color: var(--mat-sys-background),
+    supporting-text-color: var(--mat-sys-on-background),
   ));
 }

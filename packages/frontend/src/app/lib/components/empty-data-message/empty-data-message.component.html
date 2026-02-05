@@ -1,0 +1,9 @@
+@let msg = message();
+
+<div class="no-data">
+  <mat-icon class="no-data__icon">inventory_2</mat-icon>
+  <h4 class="no-data__title">{{ title() }}</h4>
+  @if (msg) {
+    <p class="no-data__msg">{{ msg }}</p>
+  }
+</div>

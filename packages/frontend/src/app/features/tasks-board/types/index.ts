@@ -2,22 +2,23 @@ export interface Task {
   id: string;
   title: string;
   description: string;
-  priority: EPriotity;
+  priority: EPriority;
   creationDate: string;
   status: EStatus;
 }
 
-export enum EPriotity {
+export enum EPriority {
   LOW = 'low',
   MEDIUM = 'medium',
-  LARGE = 'large',
+  HIGH = 'high',
   URGENT = 'urgent',
 }
 
 export enum EStatus {
-  TO_DO = 'to-do',
+  NEW = 'new',
   IN_PROGRESS = 'in-progress',
   DONE = 'done',
   REVIEW = 'review',
   BACKLOG = 'backlog',
 }
+

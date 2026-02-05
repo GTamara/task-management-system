@@ -1,0 +1,6 @@
+@mixin cropped-multiline-text($quantity) {
+    display: -webkit-box;
+    -webkit-line-clamp: $quantity;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

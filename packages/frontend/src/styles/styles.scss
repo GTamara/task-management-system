@@ -2,8 +2,9 @@
 
 @use './fonts' as *;
 @use './colors' as *;
-@use './theme-settings' as *;
 @use './vars' as *;
+@use './mixins' as *;
+@use './theme-settings' as *;
 
 html, body { height: 100%; }
 

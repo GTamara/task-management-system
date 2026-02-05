@@ -3,21 +3,23 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-inline-size: 236px;
 }
 
 .toolbar {
-  box-shadow: 0 1px 1px #5d5d5d;
+  white-space: normal;
+  box-shadow: 0 1px 1px var(--shadow-color);
 }
 
 .title {
   position: relative;
   display: inline-block;
-  margin-right: auto;
   font-family: var(--accent-font-family);
   font-style: italic;
   font-size: var(--mat-sys-title-large-size);
   font-weight: 700;
   letter-spacing: 3px;
+  margin: 0.5rem 0;
 
   &__name {
     position: relative;
@@ -32,7 +34,7 @@
 
   &__shadow {
     position: absolute;
-    top: 0.3px;
+    top: 0.5px;
     left: 0;
     color: transparent;
     text-shadow: 0 0 1px #fff;
@@ -43,4 +45,6 @@
   flex: 1;
   overflow: auto;
   background-color: var(--mat-sys-on-surface);
+  padding: 1rem;
+  box-sizing: border-box;
 }

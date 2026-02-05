@@ -1,0 +1,58 @@
+@use 'mixins' as mixins;
+
+:host {
+  position: relative;
+  display: contents;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.card {
+  position: relative;
+  padding: 0.8rem;
+  cursor: pointer;
+  border-left: 1px solid var(--mat-sys-primary) !important;
+  border-radius: 0.4rem;
+  transition: box-shadow 0.4s ease;
+  box-shadow: 0 0 3px var(--mat-sys-outline);
+
+  &:hover {
+    box-shadow:
+      0 0 4px var(--mat-sys-outline),
+  }
+
+  &.selected {
+    background-color: var(--card-selected-background);
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    gap: 1rem;
+    flex-grow: 0;
+
+    // word-break: break-word; <- свойство работает лучше, но, ксожалению, оно deprecated
+    overflow-wrap: anywhere;
+  }
+
+  &__content {
+    font-size: 0.8rem;
+    overflow-wrap: anywhere;
+  }
+
+  &__actions {
+    justify-content: flex-end;
+    margin-block-start: auto;
+    padding: 0;
+    min-height: auto;
+  }
+}
+
+.cropped-text {
+  @include mixins.cropped-multiline-text(3);
+}
+

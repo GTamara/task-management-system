@@ -3,8 +3,8 @@ import { ComponentStore } from '@ngrx/component-store';
 import { Task } from '../../types';
 import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { TasksApiService } from '../tasks-api-service/tasks-api.service';
-import { ToastService } from '../../../../core/services/toast-service/toast.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ToastService } from '@core/services/toast-service/toast.service';
 
 interface State {
   tasks: Task[] | undefined;
@@ -31,7 +31,12 @@ export class TasksStoreService extends ComponentStore<State> {
   readonly tasksSignal = toSignal(
     this.select(state => state.tasks),
     { initialValue: [] }
-  )
+  );
+
+  readonly isLoadingSignal = toSignal(
+    this.select(state => state.isLoading),
+    { initialValue: false }
+  );
 
   readonly getTasks = this.effect((trigger$: Observable<void>) => trigger$.pipe(
     tap(() => this.updateIsLoading(true)),

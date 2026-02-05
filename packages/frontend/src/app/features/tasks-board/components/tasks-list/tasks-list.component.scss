@@ -1,0 +1,7 @@
+.tasks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  place-items: stretch stretch;
+  place-items: stretch
+}

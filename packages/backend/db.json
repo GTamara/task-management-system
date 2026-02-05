@@ -20,15 +20,15 @@
     "id": "3",
     "title": "Настроить NgRx ComponentStore",
     "description": "Создать store для управления состоянием задач с эффектами и селекторами",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-17",
-    "status": "to-do"
+    "status": "new"
     },
     {
     "id": "4",
     "title": "Добавить фильтрацию по статусу",
     "description": "Реализовать фильтры для отображения задач по их статусу (todo, in-progress, done)",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-18",
     "status": "review"
     },
@@ -44,9 +44,9 @@
     "id": "6",
     "title": "Создать адаптивный дизайн",
     "description": "Настроить responsive layout для мобильных устройств и планшетов",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-20",
-    "status": "to-do"
+    "status": "new"
     },
     {
     "id": "7",
@@ -60,9 +60,9 @@
     "id": "8",
     "title": "Написать unit тесты",
     "description": "Покрыть сервисы и компоненты юнит-тестами с использованием Jest",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-22",
-    "status": "to-do"
+    "status": "new"
     },
     {
     "id": "9",
@@ -76,7 +76,7 @@
     "id": "10",
     "title": "Добавить валидацию форм",
     "description": "Реализовать кастомные валидаторы для формы создания задачи",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-24",
     "status": "done"
     },
@@ -86,13 +86,13 @@
     "description": "Применить lazy loading для feature модулей и code splitting",
     "priority": "low",
     "creationDate": "2026-01-25",
-    "status": "to-do"
+    "status": "new"
     },
     {
     "id": "12",
     "title": "Добавить drag-and-drop",
     "description": "Реализовать перетаскивание задач между колонками (статусами)",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-26",
     "status": "backlog"
     },
@@ -102,7 +102,7 @@
     "description": "Заменить mock сервис на работу с бэкендом через REST API",
     "priority": "high",
     "creationDate": "2026-01-27",
-    "status": "to-do"
+    "status": "new"
     },
     {
     "id": "14",
@@ -124,7 +124,7 @@
     "id": "16",
     "title": "Рефакторинг кода",
     "description": "Улучшить структуру проекта, вынести общую логику в shared модули",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-01-30",
     "status": "review"
     },
@@ -142,7 +142,7 @@
     "description": "Добавить возможность экспортировать список задач в CSV формат",
     "priority": "low",
     "creationDate": "2026-02-01",
-    "status": "to-do"
+    "status": "new"
     },
     {
     "id": "19",
@@ -156,9 +156,9 @@
     "id": "20",
     "title": "Документация проекта",
     "description": "Написать подробный README с инструкциями по запуску и архитектурой",
-    "priority": "imedium",
+    "priority": "medium",
     "creationDate": "2026-02-03",
-    "status": "to-do"
+    "status": "new"
     }
   ]
 }

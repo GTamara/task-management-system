@@ -1,1 +1,27 @@
-<p>task-item works!</p>
+@let data = taskData();
+<mat-card
+  class="card"
+  (click)="selectItem($event)"
+  (dblclick)="handleDblClick($event)"
+  [class.selected]="isSelected()"
+>
+  <mat-card-header class="card__title">
+    <mat-card-title>
+      <span class="cropped-text">{{ data.title }}</span>
+    </mat-card-title>
+    <app-chip
+      [chipConfig]="PRIORITY_CONFIG[data.priority]"
+      [showLable]="false"
+    />
+  </mat-card-header>
+  <p
+    class="card__content cropped-text"
+    [class.completed]="data.status === EStatus.DONE"
+  >{{ data.description }}</p>
+  <mat-card-actions class="card__actions">
+    <app-chip
+      [chipConfig]="STATUS_CONFIG[data.status]"
+      [showLable]="true"
+    />
+  </mat-card-actions>
+</mat-card>

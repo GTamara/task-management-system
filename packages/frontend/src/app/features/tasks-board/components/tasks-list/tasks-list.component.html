@@ -1,1 +1,17 @@
-<p>tasks-list works!</p>
+@let tasks = tasksSignal();
+@let isLoading = isLoadingSignal();
+
+@if (!isLoading) {
+<section class="tasks-container">
+  @if (tasks?.length) {
+    @for (item of tasks; track item.id) {
+      <app-task-item [taskData]="item" />
+    }
+  } @else {
+    <app-empty-data-message />
+  }
+  </section>
+} @else {
+  <app-spinner />
+}
+
