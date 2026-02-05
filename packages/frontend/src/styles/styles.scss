@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use './fonts' as *;
+@use './colors' as *;
+@use './theme-settings' as *;
+@use './vars' as *;
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: var(--regular-font-family);
+  color: var(--mat-sys-on-surface);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+mat-card-title {
+  font-family: var(--accent-font-family);
+  font-weight: 700;
+  margin: 0;
+}

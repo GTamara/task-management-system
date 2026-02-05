@@ -28,6 +28,7 @@
   },
   "ignoreFiles": [
     "src/styles/_colors.scss",
-    "src/styles/themes/*.scss"
+    "src/styles/themes/*.scss",
+    "node_modules/**/*"
   ]
 }
