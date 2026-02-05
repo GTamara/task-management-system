@@ -1,9 +1,10 @@
 import { ApplicationConfig, ErrorHandler, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 
-import { routes } from './app.routes';
+import { routes } from './routing/app.routes';
 import { materialConfigProviders } from './material/material.config';
-import { GlobalErrorHandlerService } from './core/global-error-handler/global-error-handler.service';
+import { GlobalErrorHandlerService } from './core/services/global-error-handler/global-error-handler.service';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandlerService,
-    }
+    },
+    provideHttpClient(),
   ]
 };

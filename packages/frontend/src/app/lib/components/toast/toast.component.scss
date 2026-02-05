@@ -24,13 +24,13 @@
     fadeOut 0.9s ease 4s forwards;
 
   &.success {
-    background-color: var(--stock-up);
-    color: var(--mat-sys-on-primary);
+    background-color: var(  --mat-sys-primary-container);
+    color: var(--mat-sys-on-surface);
   }
 
   &.error {
-    background-color: var(--mat-sys-on-error-container);
-    color: var(--mat-sys-on-error);
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-surface);
   }
 
   &.warning {
@@ -40,7 +40,7 @@
 
   &.info {
     background-color: rgb(0 133 242 / 70%);
-    color: var(--mat-sys-on-primary);
+    color: var(--mat-sys-on-surface);
   }
 }
 

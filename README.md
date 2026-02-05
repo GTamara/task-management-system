@@ -18,4 +18,13 @@
 
 * SCSS файлы → Stylelint
 
+## 🛠️ Технический стек
 
+* Angular 19 + TypeScript 5+
+* Angular Material 3.0 с дефолтной темой "cyan-orange"
+* NgRx ComponentStore для state management
+* Standalone компоненты и lazy loading
+
+### Backend:
+
+* json-server

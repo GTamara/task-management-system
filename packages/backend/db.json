@@ -1,3 +1,164 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+    "id": "1",
+    "title": "Инициализировать проект Angular",
+    "description": "Создать новое приложение с настройкой роутинга, Material и основными модулями",
+    "priority": "high",
+    "creationDate": "2026-01-15",
+    "status": "done"
+    },
+    {
+    "id": "2",
+    "title": "Реализовать CRUD операции",
+    "description": "Добавить создание, чтение, обновление и удаление задач через HTTP сервис",
+    "priority": "high",
+    "creationDate": "2026-01-16",
+    "status": "in-progress"
+    },
+    {
+    "id": "3",
+    "title": "Настроить NgRx ComponentStore",
+    "description": "Создать store для управления состоянием задач с эффектами и селекторами",
+    "priority": "imedium",
+    "creationDate": "2026-01-17",
+    "status": "to-do"
+    },
+    {
+    "id": "4",
+    "title": "Добавить фильтрацию по статусу",
+    "description": "Реализовать фильтры для отображения задач по их статусу (todo, in-progress, done)",
+    "priority": "imedium",
+    "creationDate": "2026-01-18",
+    "status": "review"
+    },
+    {
+    "id": "5",
+    "title": "Реализовать поиск с debounce",
+    "description": "Добавить поиск по названию и описанию с задержкой 300мс для оптимизации",
+    "priority": "low",
+    "creationDate": "2026-01-19",
+    "status": "backlog"
+    },
+    {
+    "id": "6",
+    "title": "Создать адаптивный дизайн",
+    "description": "Настроить responsive layout для мобильных устройств и планшетов",
+    "priority": "imedium",
+    "creationDate": "2026-01-20",
+    "status": "to-do"
+    },
+    {
+    "id": "7",
+    "title": "Добавить темную тему",
+    "description": "Реализовать переключение между светлой и темной темами с сохранением в localStorage",
+    "priority": "low",
+    "creationDate": "2026-01-21",
+    "status": "backlog"
+    },
+    {
+    "id": "8",
+    "title": "Написать unit тесты",
+    "description": "Покрыть сервисы и компоненты юнит-тестами с использованием Jest",
+    "priority": "imedium",
+    "creationDate": "2026-01-22",
+    "status": "to-do"
+    },
+    {
+    "id": "9",
+    "title": "Исправить баг с сортировкой",
+    "description": "При сортировке по дате некорректно отображаются задачи с null значениями",
+    "priority": "urgent",
+    "creationDate": "2026-01-23",
+    "status": "in-progress"
+    },
+    {
+    "id": "10",
+    "title": "Добавить валидацию форм",
+    "description": "Реализовать кастомные валидаторы для формы создания задачи",
+    "priority": "imedium",
+    "creationDate": "2026-01-24",
+    "status": "done"
+    },
+    {
+    "id": "11",
+    "title": "Оптимизация загрузки бандла",
+    "description": "Применить lazy loading для feature модулей и code splitting",
+    "priority": "low",
+    "creationDate": "2026-01-25",
+    "status": "to-do"
+    },
+    {
+    "id": "12",
+    "title": "Добавить drag-and-drop",
+    "description": "Реализовать перетаскивание задач между колонками (статусами)",
+    "priority": "imedium",
+    "creationDate": "2026-01-26",
+    "status": "backlog"
+    },
+    {
+    "id": "13",
+    "title": "Интеграция с реальным API",
+    "description": "Заменить mock сервис на работу с бэкендом через REST API",
+    "priority": "high",
+    "creationDate": "2026-01-27",
+    "status": "to-do"
+    },
+    {
+    "id": "14",
+    "title": "Добавить уведомления",
+    "description": "Реализовать toast-уведомления для успешных операций и ошибок",
+    "priority": "low",
+    "creationDate": "2026-01-28",
+    "status": "done"
+    },
+    {
+    "id": "15",
+    "title": "Создать dashboard с графиками",
+    "description": "Добавить страницу со статистикой по задачам (графики, метрики)",
+    "priority": "low",
+    "creationDate": "2026-01-29",
+    "status": "backlog"
+    },
+    {
+    "id": "16",
+    "title": "Рефакторинг кода",
+    "description": "Улучшить структуру проекта, вынести общую логику в shared модули",
+    "priority": "imedium",
+    "creationDate": "2026-01-30",
+    "status": "review"
+    },
+    {
+    "id": "17",
+    "title": "Добавить e2e тесты",
+    "description": "Написать Cypress тесты для основных пользовательских сценариев",
+    "priority": "low",
+    "creationDate": "2026-01-31",
+    "status": "backlog"
+    },
+    {
+    "id": "18",
+    "title": "Реализовать экспорт в CSV",
+    "description": "Добавить возможность экспортировать список задач в CSV формат",
+    "priority": "low",
+    "creationDate": "2026-02-01",
+    "status": "to-do"
+    },
+    {
+    "id": "19",
+    "title": "Настройка CI/CD",
+    "description": "Добавить GitHub Actions для автоматического тестирования и деплоя",
+    "priority": "high",
+    "creationDate": "2026-02-02",
+    "status": "in-progress"
+    },
+    {
+    "id": "20",
+    "title": "Документация проекта",
+    "description": "Написать подробный README с инструкциями по запуску и архитектурой",
+    "priority": "imedium",
+    "creationDate": "2026-02-03",
+    "status": "to-do"
+    }
+  ]
 }
