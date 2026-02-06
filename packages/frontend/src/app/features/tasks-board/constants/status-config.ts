@@ -1,7 +1,7 @@
-import { ChipConfig } from '@lib/components/chip/types';
+import { VisualEntityConfig } from '@lib/types/types';
 import { EStatus } from '../types';
 
-export const STATUS_CONFIG: Record<EStatus, ChipConfig> = {
+export const STATUS_CONFIG: Record<EStatus, VisualEntityConfig> = {
   [EStatus.BACKLOG]: {
     icon: 'inventory_2',
     color: '#757575',

@@ -3,7 +3,7 @@ export interface Task {
   title: string;
   description: string;
   priority: EPriority;
-  creationDate: string;
+  createdAt: string;
   status: EStatus;
 }
 

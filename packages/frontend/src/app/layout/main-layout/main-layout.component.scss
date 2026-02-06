@@ -16,7 +16,7 @@
   display: inline-block;
   font-family: var(--accent-font-family);
   font-style: italic;
-  font-size: var(--mat-sys-title-large-size);
+  font-size: 1.9rem;
   font-weight: 700;
   letter-spacing: 3px;
   margin: 0.5rem 0;
@@ -44,7 +44,7 @@
 .content {
   flex: 1;
   overflow: auto;
-  background-color: var(--mat-sys-on-surface);
+  background-color: var(--mat-sys-background);
   padding: 1rem;
   box-sizing: border-box;
 }

@@ -1,3 +1,13 @@
+@use '@angular/material' as mat;
+@use './themes/theme-turquoise' as theme_turquoise;
+
+$colors-theme-light: mat.define-theme((
+  color: (theme-type: light,
+      primary: theme_turquoise.$primary-palette,
+      tertiary: theme_turquoise.$tertiary-palette,
+    ),
+  ));
+
 :root {
   --shadow-color: #5d5d5d;
   --border-light-color: #a3ceca;
@@ -17,4 +27,6 @@
     #6da3b4,
     #a8b6a3
   );
+
+  // --neutral-variant-color: var(--neutral-variant-50);
 }

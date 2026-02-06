@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ChipConfig } from './types';
+import { VisualEntityConfig } from '../../types/types';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -15,6 +15,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class ChipComponent {
 
-  chipConfig = input.required<ChipConfig>();
+  chipConfig = input.required<VisualEntityConfig>();
   showLable = input<boolean>(true);
 }

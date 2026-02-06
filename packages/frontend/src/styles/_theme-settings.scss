@@ -1,4 +1,24 @@
 @use '@angular/material' as mat;
+@use './themes/theme-turquoise' as theme_turquoise;
+@use './colors' as *;
+
+:root {
+  color-scheme: light;
+
+  @include mat.theme((
+    color: (
+     primary: theme_turquoise.$primary-palette,
+      tertiary: theme_turquoise.$tertiary-palette,
+      theme-type: light,
+      use-system-variables: true,
+    ),
+    density: -5,
+  ));
+
+  @include mat.progress-spinner-overrides(
+    (active-indicator-color: var(---mat-snack-bar-button-color))
+  );
+}
 
 :root {
   @include mat.toolbar-overrides((
@@ -6,15 +26,21 @@
     standard-height: 52px,
     mobile-height: auto,
   ));
+
   @include mat.card-overrides((
-    elevated-container-color: var(--card-background),
     title-text-line-height: 1,
     title-text-font: var(--accent-font-family),
     title-text-size: 1.1rem,
     title-text-weight: 750,
   ));
+
   @include mat.tooltip-overrides((
     container-color: var(--mat-sys-background),
     supporting-text-color: var(--mat-sys-on-background),
+  ));
+
+  @include mat.select-overrides((
+    // panel-background-color: var(--mat-sys-on-background),
+    // enabled-trigger-text-color: red,
   ));
 }

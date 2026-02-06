@@ -1,0 +1,19 @@
+@let state = initState();
+<!-- <section class="filters-container"> -->
+<app-dropdown-filter
+  [config]="STATUS_CONFIG"
+  [value]="state.status"
+  label="Статус"
+  (newValueSelected)="newStatusSelected($event)"
+/>
+
+<app-dropdown-filter
+  [config]="PRIORITY_CONFIG"
+  [value]="state.priority"
+  label="Приоритет"
+  (newValueSelected)="newPrioritySelected($event)"
+/>
+<button mat-stroked-button
+  (click)="resetAllFilters()"
+>Сбросить фильтры</button>
+<!-- </section> -->

@@ -13,14 +13,17 @@
   position: relative;
   padding: 0.8rem;
   cursor: pointer;
-  border-left: 1px solid var(--mat-sys-primary) !important;
+  border-left: 1px solid var(--mat-sys-inverse-primary)
+  ;
   border-radius: 0.4rem;
-  transition: box-shadow 0.4s ease;
-  box-shadow: 0 0 3px var(--mat-sys-outline);
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 3px var(--mat-sys-outline-variant);
 
   &:hover {
     box-shadow:
-      0 0 4px var(--mat-sys-outline),
+      0 0 6px var(--mat-sys-secondary-fixed),
+      0 0 8px var(--mat-sys-outline-variant),
+      0 0 100px var(--mat-sys-surface-variant) inset,
   }
 
   &.selected {
