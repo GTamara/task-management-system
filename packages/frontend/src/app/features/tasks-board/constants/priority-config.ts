@@ -22,8 +22,8 @@ export const PRIORITY_CONFIG: Record<EPriority, VisualEntityConfig> = {
   },
   [EPriority.URGENT]: {
     icon: 'priority_high',
-    bgColor: '#fa67bc',
-    color: '#3b4647',
+    bgColor: '#fa6767',
+    color: '#fff',
     label: 'Urgent'
   }
 };

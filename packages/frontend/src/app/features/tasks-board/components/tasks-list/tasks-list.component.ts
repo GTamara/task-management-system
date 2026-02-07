@@ -4,10 +4,8 @@ import { SpinnerComponent } from '@lib/components/spinner/spinner';
 import { TaskItemComponent } from '../task-item/task-item.component';
 import { EmptyDataMessageComponent } from '@lib/components/empty-data-message/empty-data-message.component';
 import { TasksFiltersComponent } from '../tasks-list-filters/tasks-filters.component';
-import { Task } from '@features/tasks-board/types';
+import { ALL_TASK_KEYS, Task } from '@features/tasks-board/types';
 import { FiltersState } from '@features/tasks-board/types/filters-types';
-import { createKeys } from '@lib/utils/check-all-keys';
-
 @Component({
   selector: 'app-tasks-list',
   imports: [
@@ -30,23 +28,33 @@ export class TasksListComponent {
   private readonly filtersState = signal<FiltersState>({
     priority: null,
     status: null,
-    createdAt: null
+    createdAt: null,
+    search: null,
   });
-
-  private readonly _taskKeysCache = new Set<keyof Task>(
-    createKeys<Task>()(
-      'id',
-      'title',
-      'description',
-      'priority',
-      'createdAt',
-      'status'
-    )
-  );
 
   protected readonly filteredTasks = computed(() => {
     const filters = this.filtersState();
-    return this.getFilteredTasks(filters);
+    let tasks = this.storedTasks();
+
+    if (!tasks) return
+
+    if (filters.search) {
+      tasks = this.searchByTitleOrDescription(filters.search, tasks);
+    }
+
+    if (filters.status) {
+      tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.STATUS, filters.status, tasks);
+    }
+
+    if (filters.priority) {
+      tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.PRIORITY, filters.priority, tasks);
+    }
+
+    if (filters.createdAt) {
+      tasks = this.filterByDate(filters.createdAt, tasks);
+    }
+
+    return tasks;
   });
 
   protected updateFiltersState(evt: Partial<FiltersState>) {
@@ -56,41 +64,26 @@ export class TasksListComponent {
     });
   }
 
-  private getFilteredTasks(filters: FiltersState): Task[] {
-    console.log('updateFiltersState', Object.entries(filters));
-    const sourceTasks = this.storedTasks();
-    let result: Task[] = sourceTasks ?? [];
-    Object.entries(filters).forEach(([key, value]) => {
-      console.log('forEach', key, !!value);
-      if (!!value && this.isTaskKeyGuard(key)) {
-        switch (key) {
-          case 'priority':
-          case 'status':
-            result = this.filterByVisualEntity(key, value, result);
-            break;
-          case 'createdAt':
-            result = this.filterByDate(value, result);
-            break;
-        }
-      }
-    });
-    return result;
-
+  private searchByTitleOrDescription (value: string, tasks: Task[]) {
+    return tasks.filter(task => task.title.toLowerCase().includes(value)
+      || task.description.toLowerCase().includes(value)
+    );
   }
 
   /* filter by status & priority */
-  private filterByVisualEntity(key: keyof Task, value: string, tasks: Task[]): Task[] {
-    return tasks?.filter(task => task[key] === value);
+  private filterByStatusOrPriority(key: keyof Task, value: string, tasks: Task[]): Task[] {
+    return tasks.filter(task => task[key] === value);
   }
 
   private filterByDate (value: FiltersState['createdAt'], tasks: Task[]): Task[] {
     const start = value?.startDate;
     const end = value?.endDate;
-    console.log(start, end, value);
+
     if (!start || !end) {
       return tasks;
     };
-    return tasks?.filter(task => {
+
+    return tasks.filter(task => {
       const taskDate = new Date(task.createdAt);
       const taskDateTimestamp = taskDate.getTime();
       return taskDateTimestamp >= start.getTime()
@@ -98,7 +91,4 @@ export class TasksListComponent {
     });
   }
 
-  private isTaskKeyGuard(key: unknown): key is keyof Task {
-    return typeof key === 'string' && this._taskKeysCache.has(key as keyof Task);
-  }
 }

@@ -1,7 +1,8 @@
 :host {
   position: relative;
-  display: flex;
-  margin-block-end: 1rem;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
+  place-items: stretch;
+  margin-block-end: 1rem;
 }

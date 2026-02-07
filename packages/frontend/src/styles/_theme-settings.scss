@@ -26,10 +26,10 @@
   ));
 
   @include mat.card-overrides((
-    title-text-line-height: 1,
+    title-text-line-height: 1.2,
     title-text-font: var(--accent-font-family),
     title-text-size: 1.4rem,
-    title-text-weight: 750,
+    title-text-weight: 700,
   ));
 
   @include mat.datepicker-overrides((

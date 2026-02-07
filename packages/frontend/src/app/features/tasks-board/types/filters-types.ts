@@ -5,5 +5,6 @@ export interface FiltersState {
   priority: EPriority | null;
   status: EStatus | null;
   createdAt: DateRangeValues | null;
+  search: string | null;
 }
 

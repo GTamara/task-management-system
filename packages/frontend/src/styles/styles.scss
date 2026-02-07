@@ -25,3 +25,11 @@ mat-card-title {
   margin: 0;
 }
 
+mat-card-title {
+  color: var(--mat-sys-primary);
+}
+
+mat-form-field {
+    width: 100%;
+  flex: 1 1 100%
+}

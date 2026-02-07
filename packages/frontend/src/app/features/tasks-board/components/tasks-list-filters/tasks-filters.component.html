@@ -16,7 +16,10 @@
 
 <app-date-range-filter (dateRangeChanged)="newDateRangeSelected($event)" />
 
+<app-search (searchChanged)="searchChanged($event)" />
+
 <button
+  class="reset"
   mat-icon-button
   matTooltip="Сбросить фильтры"
   (click)="resetAllFilters()"

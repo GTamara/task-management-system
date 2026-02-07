@@ -9,12 +9,14 @@ import { FiltersState } from '@features/tasks-board/types/filters-types';
 import { DateRangeFilterComponent } from '@lib/components/date-range-filter/date-range-filter.component';
 import { DateRangeValues } from '@lib/components/date-range-filter/date-range-filter.types';
 import { DropdownFilterComponent } from '@lib/components/dropdown-filter/dropdown-filter.component';
+import { SearchComponent } from '@lib/components/search/search.component';
 
 @Component({
   selector: 'app-tasks-filters',
   imports: [
     DropdownFilterComponent,
     DateRangeFilterComponent,
+    SearchComponent,
 
     MatButtonModule,
     MatIconModule,
@@ -29,7 +31,8 @@ export class TasksFiltersComponent {
   initState = input<FiltersState>({
     priority: null,
     status: null,
-    createdAt: null
+    createdAt: null,
+    search: null,
   });
 
   filtersStateChanged = output<Partial<FiltersState>>();
@@ -56,5 +59,10 @@ export class TasksFiltersComponent {
         endDate: evt.endDate ?? null,
       }
     });
+  }
+
+  protected searchChanged(search: string | null): void {
+    console.log(search);
+    this.filtersStateChanged.emit({ search });
   }
 }

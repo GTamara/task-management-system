@@ -5,6 +5,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { DateRangeValues } from './date-range-filter.types';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 type DateRangeFormFroup = FormGroup<{
   startDate: FormControl<Date | null>;
@@ -33,6 +34,9 @@ export class DateRangeFilterComponent {
   });
 
   dateRangeChanged: OutputRef<Partial<DateRangeValues>> = outputFromObservable(
-    this.rangeForm.valueChanges
+    this.rangeForm.valueChanges.pipe(
+      debounceTime(200),
+      distinctUntilChanged()
+    )
   );
 }
