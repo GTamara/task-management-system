@@ -1,7 +1,10 @@
-@let tasks = filteredTasks();
+@let tasks = displayedTasks();
 @let isLoading = isLoadingSignal();
 
-<app-tasks-filters (filtersStateChanged)="updateFiltersState($event)" />
+<app-tasks-filters
+  (filtersStateChanged)="updateFiltersState($event)"
+  (sortStateChanged)="updateSortState($event)"
+/>
 
 @if (!isLoading) {
   <section class="tasks-container">

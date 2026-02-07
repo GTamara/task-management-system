@@ -6,7 +6,10 @@
 @use './mixins' as *;
 @use './theme-settings' as *;
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -30,6 +33,11 @@ mat-card-title {
 }
 
 mat-form-field {
-    width: 100%;
+  width: 100%;
   flex: 1 1 100%
 }
+
+[primary-color] {
+  color: var(--mat-sys-primary);
+}
+

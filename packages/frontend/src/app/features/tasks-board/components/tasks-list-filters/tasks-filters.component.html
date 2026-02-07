@@ -1,28 +1,33 @@
-@let state = initState();
-<!-- <section class="filters-container"> -->
-<app-dropdown-filter
-  [config]="STATUS_CONFIG"
-  [value]="state.status"
-  label="Статус"
-  (newValueSelected)="newStatusSelected($event)"
-/>
+<section class="filters">
+  <app-dropdown-filter
+    [config]="STATUS_CONFIG"
+    label="Статус"
+    (newValueSelected)="newStatusSelected($event)"
+  />
 
-<app-dropdown-filter
-  [config]="PRIORITY_CONFIG"
-  [value]="state.priority"
-  label="Приоритет"
-  (newValueSelected)="newPrioritySelected($event)"
-/>
+  <app-dropdown-filter
+    [config]="PRIORITY_CONFIG"
+    label="Приоритет"
+    (newValueSelected)="newPrioritySelected($event)"
+  />
 
-<app-date-range-filter (dateRangeChanged)="newDateRangeSelected($event)" />
+  <app-date-range-filter (dateRangeChanged)="newDateRangeSelected($event)" />
+  <app-search (searchChanged)="searchChanged($event)" />
+</section>
+<div class="actions">
+  <button
+    class="reset"
+    mat-icon-button
+    matTooltip="Сбросить фильтры"
+    (click)="resetAllFilters()"
+  >
+    <mat-icon>restart_alt</mat-icon>
+  </button>
 
-<app-search (searchChanged)="searchChanged($event)" />
-
-<button
-  class="reset"
-  mat-icon-button
-  matTooltip="Сбросить фильтры"
-  (click)="resetAllFilters()"
->
-  <mat-icon>restart_alt</mat-icon>
-</button>
+  <app-sort-menu
+    [fields]="SORT_FIELDS"
+    [defaultSortFiled]="SORT_FIELDS[0]"
+    matTooltip="Сортировать"
+    (sortChanged)="sortTasks($event)"
+  />
+</div>

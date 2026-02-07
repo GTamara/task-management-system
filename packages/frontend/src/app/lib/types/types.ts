@@ -5,5 +5,3 @@ export interface VisualEntityConfig {
   label?: string;
   order?: number;
 }
-
-export type FilterOption<T> = VisualEntityConfig & { value: T };

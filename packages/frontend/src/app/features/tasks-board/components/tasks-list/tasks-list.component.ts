@@ -6,6 +6,9 @@ import { EmptyDataMessageComponent } from '@lib/components/empty-data-message/em
 import { TasksFiltersComponent } from '../tasks-list-filters/tasks-filters.component';
 import { ALL_TASK_KEYS, Task } from '@features/tasks-board/types';
 import { FiltersState } from '@features/tasks-board/types/filters-types';
+import { SortState } from '@lib/components/filter-menu/sort-types';
+import { PRIORITY_CONFIG } from '@features/tasks-board/constants/priority-config';
+import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
 @Component({
   selector: 'app-tasks-list',
   imports: [
@@ -32,27 +35,40 @@ export class TasksListComponent {
     search: null,
   });
 
-  protected readonly filteredTasks = computed(() => {
-    const filters = this.filtersState();
+  protected readonly sortState = signal<SortState>({
+    field: {
+      title: 'Дата создания',
+      code: ALL_TASK_KEYS.createdAt,
+    },
+    direction: 'desc',
+  });
+
+  protected readonly displayedTasks = computed(() => {
     let tasks = this.storedTasks();
 
     if (!tasks) return
+
+    const filters = this.filtersState();
 
     if (filters.search) {
       tasks = this.searchByTitleOrDescription(filters.search, tasks);
     }
 
     if (filters.status) {
-      tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.STATUS, filters.status, tasks);
+      tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.status, filters.status, tasks);
     }
 
     if (filters.priority) {
-      tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.PRIORITY, filters.priority, tasks);
+      tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.priority, filters.priority, tasks);
     }
 
     if (filters.createdAt) {
       tasks = this.filterByDate(filters.createdAt, tasks);
     }
+
+    const sortSTate = this.sortState();
+
+    tasks = this.sortData(sortSTate, tasks);
 
     return tasks;
   });
@@ -60,6 +76,13 @@ export class TasksListComponent {
   protected updateFiltersState(evt: Partial<FiltersState>) {
     this.filtersState.set({
       ...this.filtersState(),
+      ...evt,
+    });
+  }
+
+  protected updateSortState(evt: SortState) {
+    this.sortState.set({
+      ...this.sortState(),
       ...evt,
     });
   }
@@ -91,4 +114,37 @@ export class TasksListComponent {
     });
   }
 
+  private sortData(sort: SortState, tasks: Task[]): Task[] {
+    const tasksToSort = [...tasks];
+    const dir = sort.direction === 'asc' ? 1 : -1;
+    const code = sort.field.code as keyof Task;
+    const getSortValue = this.sortValueGetter(code);
+
+    tasksToSort.sort((a, b) => {
+      const aValue: string | number | Date = getSortValue(a);
+      const bValue: string | number | Date = getSortValue(b);
+      if (aValue === undefined && bValue === undefined) return 0;
+      if (aValue === undefined) return 1;
+      if (bValue === undefined) return -1;
+
+      return (aValue < bValue ? -1 : aValue > bValue ? 1 : 0) * dir;
+    });
+
+    return tasksToSort;
+  }
+
+  private sortValueGetter (
+    code: keyof Task
+  ): (task: Task)  => Task[keyof Task] | number  {
+    switch (code) {
+      case ALL_TASK_KEYS.priority:
+        return (task: Task) => PRIORITY_CONFIG[task[code]].order ?? 0;
+      case ALL_TASK_KEYS.status:
+        return (task: Task) => STATUS_CONFIG[task[code]].order ?? 0;
+      case ALL_TASK_KEYS.createdAt:
+        return (task: Task) => new Date(task[code]).getTime();
+      default:
+        return (task: Task) => task[code];
+    }
+  }
 }

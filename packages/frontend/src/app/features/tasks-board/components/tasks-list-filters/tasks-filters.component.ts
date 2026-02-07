@@ -1,14 +1,17 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PRIORITY_CONFIG } from '@features/tasks-board/constants/priority-config';
+import { SORT_FIELDS } from '@features/tasks-board/constants/sort-fields';
 import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
-import { EPriority, EStatus } from '@features/tasks-board/types';
+import { ALL_TASK_KEYS, EPriority, EStatus } from '@features/tasks-board/types';
 import { FiltersState } from '@features/tasks-board/types/filters-types';
 import { DateRangeFilterComponent } from '@lib/components/date-range-filter/date-range-filter.component';
 import { DateRangeValues } from '@lib/components/date-range-filter/date-range-filter.types';
 import { DropdownFilterComponent } from '@lib/components/dropdown-filter/dropdown-filter.component';
+import { SortMenuComponent } from '@lib/components/filter-menu/sort-menu.component';
+import { SortState } from '@lib/components/filter-menu/sort-types';
 import { SearchComponent } from '@lib/components/search/search.component';
 
 @Component({
@@ -17,6 +20,7 @@ import { SearchComponent } from '@lib/components/search/search.component';
     DropdownFilterComponent,
     DateRangeFilterComponent,
     SearchComponent,
+    SortMenuComponent,
 
     MatButtonModule,
     MatIconModule,
@@ -28,17 +32,21 @@ import { SearchComponent } from '@lib/components/search/search.component';
 })
 export class TasksFiltersComponent {
 
-  initState = input<FiltersState>({
-    priority: null,
-    status: null,
-    createdAt: null,
-    search: null,
-  });
+  readonly sortState: SortState = {
+    field: {
+      title: 'Дата создания',
+      code: ALL_TASK_KEYS.createdAt,
+    },
+    direction: 'none',
+  } as SortState
 
   filtersStateChanged = output<Partial<FiltersState>>();
+  sortStateChanged = output<SortState>();
 
   STATUS_CONFIG = STATUS_CONFIG;
   PRIORITY_CONFIG = PRIORITY_CONFIG;
+  ALL_TASK_KEYS = ALL_TASK_KEYS;
+  SORT_FIELDS = SORT_FIELDS;
 
   protected newStatusSelected (status: EStatus | null): void {
     this.filtersStateChanged.emit({ status });
@@ -64,5 +72,9 @@ export class TasksFiltersComponent {
   protected searchChanged(search: string | null): void {
     console.log(search);
     this.filtersStateChanged.emit({ search });
+  }
+
+  protected sortTasks(sortState: SortState): void {
+    this.sortStateChanged.emit(sortState);
   }
 }

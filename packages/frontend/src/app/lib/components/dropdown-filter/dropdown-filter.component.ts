@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, input, OnInit, output, signal } fro
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { FilterOption, VisualEntityConfig } from '@lib/types/types';
+import { VisualEntityConfig } from '@lib/types/types';
 
+export type FilterOption<T> = VisualEntityConfig & { value: T };
 @Component({
   selector: 'app-dropdown-filter',
   imports: [
@@ -17,16 +18,16 @@ import { FilterOption, VisualEntityConfig } from '@lib/types/types';
 })
 export class DropdownFilterComponent<T extends string> implements OnInit {
   config = input.required<Record<T, VisualEntityConfig>>();
-  value = input.required<T | null>();
+  value = input<T | null>(null);
   label = input.required<string>();
 
   newValueSelected = output<T | null>();
 
-  protected statusOptions: FilterOption<T>[] = [];
+  protected options: FilterOption<T>[] = [];
   protected readonly selectedValue = signal<T | null>(null);
 
   ngOnInit(): void {
-    this.statusOptions = this.getOptions<T>(this.config());
+    this.options = this.getOptions<T>(this.config());
     this.selectedValue.set(this.value());
   }
 
@@ -37,7 +38,7 @@ export class DropdownFilterComponent<T extends string> implements OnInit {
 
   protected getSelectedLabel (value: string | null): string | null {
     if (!value) return null
-    return this.statusOptions.find(opt => (opt.value === value))?.label ?? null
+    return this.options.find(opt => (opt.value === value))?.label ?? null
   }
 
 

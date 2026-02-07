@@ -16,7 +16,7 @@
         <span>Все</span>
       </div>
     </mat-option>
-    @for (option of statusOptions; track option.order) {
+    @for (option of options; track option.order) {
       <mat-option
         [value]="option.value"
         [style.background-color]="option.bgColor"

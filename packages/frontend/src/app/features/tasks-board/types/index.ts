@@ -1,21 +1,21 @@
 import { createKeys } from '@lib/utils/check-all-keys';
 
 export const ALL_TASK_KEYS = {
-  ID: 'id',
-  TITLE: 'title',
-  DESCRIPTION: 'description',
-  PRIORITY: 'priority',
-  CREATED_AT: 'createdAt',
-  STATUS: 'status',
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  priority: 'priority',
+  createdAt: 'createdAt',
+  status: 'status',
 } as const;
 
 export interface Task {
-  [ALL_TASK_KEYS.ID]: string;
-  [ALL_TASK_KEYS.TITLE]: string;
-  [ALL_TASK_KEYS.DESCRIPTION]: string;
-  [ALL_TASK_KEYS.PRIORITY]: EPriority;
-  [ALL_TASK_KEYS.CREATED_AT]: string;
-  [ALL_TASK_KEYS.STATUS]: EStatus;
+  [ALL_TASK_KEYS.id]: string;
+  [ALL_TASK_KEYS.title]: string;
+  [ALL_TASK_KEYS.description]: string;
+  [ALL_TASK_KEYS.priority]: EPriority;
+  [ALL_TASK_KEYS.createdAt]: string;
+  [ALL_TASK_KEYS.status]: EStatus;
 }
 
 export const TASK_KEYS_CACHE = new Set<keyof Task>(

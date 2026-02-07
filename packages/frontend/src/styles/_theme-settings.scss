@@ -30,6 +30,7 @@
     title-text-font: var(--accent-font-family),
     title-text-size: 1.4rem,
     title-text-weight: 700,
+    elevated-container-color: #f0f9ff,
   ));
 
   @include mat.datepicker-overrides((
@@ -42,4 +43,12 @@
     Убрать это правило после перехода на Material 21!
   */
   --mdc-icon-button-icon-color: var(--mat-sys-primary);
+}
+
+div.mat-mdc-select-panel {
+  padding: 0 !important;
+}
+
+.mat-mdc-option {
+  min-height: 42px !important;
 }

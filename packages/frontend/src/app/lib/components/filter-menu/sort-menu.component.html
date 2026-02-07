@@ -1,0 +1,19 @@
+@let opts = optionsSignal();
+
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon primary-color>sort</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  @for (it of opts; track $index) {
+    <button
+      mat-menu-item
+      (click)="handleChangeSort(it)"
+    >
+      <mat-icon>{{ it.icon }}</mat-icon>
+      <span>{{ it.title }}</span>
+    </button>
+  }
+</mat-menu>
