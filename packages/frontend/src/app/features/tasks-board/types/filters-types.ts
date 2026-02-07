@@ -1,8 +1,9 @@
+import { DateRangeValues } from '@lib/components/date-range-filter/date-range-filter.types';
 import { EPriority, EStatus } from '.';
 
 export interface FiltersState {
   priority: EPriority | null;
   status: EStatus | null;
-  date: string | null;
+  createdAt: DateRangeValues | null;
 }
 

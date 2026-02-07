@@ -8,7 +8,6 @@ import { TasksListComponent } from '@features/tasks-board/components/tasks-list/
     TasksListComponent,
   ],
   templateUrl: './task-board-page.component.html',
-  styleUrl: './task-board-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskBoardPageComponent implements OnInit {

@@ -18,9 +18,7 @@
   @include mat.progress-spinner-overrides(
     (active-indicator-color: var(---mat-snack-bar-button-color))
   );
-}
 
-:root {
   @include mat.toolbar-overrides((
     container-background-color: var(--toolbar-gradient),
     standard-height: 52px,
@@ -30,17 +28,18 @@
   @include mat.card-overrides((
     title-text-line-height: 1,
     title-text-font: var(--accent-font-family),
-    title-text-size: 1.1rem,
+    title-text-size: 1.4rem,
     title-text-weight: 750,
   ));
 
-  @include mat.tooltip-overrides((
-    container-color: var(--mat-sys-background),
-    supporting-text-color: var(--mat-sys-on-background),
+  @include mat.datepicker-overrides((
+    toggle-icon-color: var(--mat-sys-primary),
+    calendar-period-button-icon-color: var(--mat-sys-primary),
+    calendar-navigation-button-icon-color: var(--mat-sys-primary),
   ));
 
-  @include mat.select-overrides((
-    // panel-background-color: var(--mat-sys-on-background),
-    // enabled-trigger-text-color: red,
-  ));
+  /* TODO: Правило добавлено, т.к. toggle-icon-color не работает в Material 19.
+    Убрать это правило после перехода на Material 21!
+  */
+  --mdc-icon-button-icon-color: var(--mat-sys-primary);
 }

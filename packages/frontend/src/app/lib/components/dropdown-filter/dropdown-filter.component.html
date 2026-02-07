@@ -5,7 +5,8 @@
   </mat-label>
   <mat-select
     [value]="selectedValue()"
-    (selectionChange)="onValueSelected($event.value)">
+    (selectionChange)="onValueSelected($event.value)"
+  >
     <mat-select-trigger>
       {{ getSelectedLabel(selectedValue()) }}
     </mat-select-trigger>
@@ -20,7 +21,8 @@
         [value]="option.value"
         [style.background-color]="option.bgColor"
       >
-        <div class="option-with-icon"
+        <div
+          class="option-with-icon"
           [style.background-color]="option.bgColor"
           [style.color]="option.color"
         >

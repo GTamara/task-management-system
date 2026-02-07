@@ -8,11 +8,14 @@ import { PRIORITY_CONFIG } from '@features/tasks-board/constants/priority-config
 import { ChipComponent } from '@lib/components/chip/chip.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-item',
   imports: [
     ChipComponent,
+
+    DatePipe,
 
     MatCardModule,
     MatIconModule,

@@ -4,16 +4,15 @@
 <app-tasks-filters (filtersStateChanged)="updateFiltersState($event)" />
 
 @if (!isLoading) {
-<section class="tasks-container">
-  @if (tasks?.length) {
-    @for (item of tasks; track item.id) {
-      <app-task-item [taskData]="item" />
+  <section class="tasks-container">
+    @if (tasks?.length) {
+      @for (item of tasks; track item.id) {
+        <app-task-item [taskData]="item" />
+      }
+    } @else {
+      <app-empty-data-message />
     }
-  } @else {
-    <app-empty-data-message />
-  }
   </section>
 } @else {
   <app-spinner />
 }
-

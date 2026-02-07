@@ -30,7 +30,7 @@ export class TasksListComponent {
   private readonly filtersState = signal<FiltersState>({
     priority: null,
     status: null,
-    date: null
+    createdAt: null
   });
 
   private readonly _taskKeysCache = new Set<keyof Task>(
@@ -57,16 +57,45 @@ export class TasksListComponent {
   }
 
   private getFilteredTasks(filters: FiltersState): Task[] {
-
+    console.log('updateFiltersState', Object.entries(filters));
     const sourceTasks = this.storedTasks();
     let result: Task[] = sourceTasks ?? [];
     Object.entries(filters).forEach(([key, value]) => {
+      console.log('forEach', key, !!value);
       if (!!value && this.isTaskKeyGuard(key)) {
-        result = result?.filter(task => task[key] === value);
+        switch (key) {
+          case 'priority':
+          case 'status':
+            result = this.filterByVisualEntity(key, value, result);
+            break;
+          case 'createdAt':
+            result = this.filterByDate(value, result);
+            break;
+        }
       }
     });
     return result;
 
+  }
+
+  /* filter by status & priority */
+  private filterByVisualEntity(key: keyof Task, value: string, tasks: Task[]): Task[] {
+    return tasks?.filter(task => task[key] === value);
+  }
+
+  private filterByDate (value: FiltersState['createdAt'], tasks: Task[]): Task[] {
+    const start = value?.startDate;
+    const end = value?.endDate;
+    console.log(start, end, value);
+    if (!start || !end) {
+      return tasks;
+    };
+    return tasks?.filter(task => {
+      const taskDate = new Date(task.createdAt);
+      const taskDateTimestamp = taskDate.getTime();
+      return taskDateTimestamp >= start.getTime()
+        && taskDateTimestamp <= end.getTime();
+    });
   }
 
   private isTaskKeyGuard(key: unknown): key is keyof Task {

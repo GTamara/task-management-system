@@ -13,7 +13,13 @@
   label="Приоритет"
   (newValueSelected)="newPrioritySelected($event)"
 />
-<button mat-stroked-button
+
+<app-date-range-filter (dateRangeChanged)="newDateRangeSelected($event)" />
+
+<button
+  mat-icon-button
+  matTooltip="Сбросить фильтры"
   (click)="resetAllFilters()"
->Сбросить фильтры</button>
-<!-- </section> -->
+>
+  <mat-icon>restart_alt</mat-icon>
+</button>
