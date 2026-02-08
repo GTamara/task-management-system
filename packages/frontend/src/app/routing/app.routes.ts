@@ -9,8 +9,8 @@ export const routes: Routes = [
   },
   {
     path: ERoute.TASKS_BOARD,
-    loadComponent: () => import('../features/tasks-board/containers/task-board-page/task-board-page.component')
-      .then(m => m.TaskBoardPageComponent),
+    loadChildren: () => import('../features/tasks-board/tasks-board.routes')
+      .then(m => m.TASKS_BOARD_ROUTES),
   },
   {
     path: '**',

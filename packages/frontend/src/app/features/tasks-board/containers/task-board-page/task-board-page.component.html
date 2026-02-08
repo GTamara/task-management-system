@@ -1,1 +1,24 @@
-<app-tasks-list />
+<!-- {{shouldOpenSidebar()}} -->
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <app-tasks-list />
+  </mat-sidenav-content>
+
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    position="end"
+    (closed)="onSidenavClosed()"
+  >
+    <button
+      class="toggle-sidenav-btn"
+      mat-icon-button
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon>{{ sidenav.opened ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+    </button>
+    <section class="task-form-container">
+      <router-outlet />
+    </section>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -9,7 +9,6 @@ import { ChipComponent } from '@lib/components/chip/chip.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
 import { DatePipe } from '@angular/common';
-
 @Component({
   selector: 'app-task-item',
   imports: [
@@ -35,12 +34,4 @@ export class TaskItemComponent {
   protected readonly ERoute = ERoute;
   protected readonly PRIORITY_CONFIG = PRIORITY_CONFIG;
   protected readonly STATUS_CONFIG = STATUS_CONFIG;
-
-  selectItem(event: Event) {
-    event.stopPropagation();
-  }
-
-  handleDblClick(event: Event) {
-    event.stopPropagation();
-  }
 }

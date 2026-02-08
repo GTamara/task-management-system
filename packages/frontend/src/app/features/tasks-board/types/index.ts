@@ -9,7 +9,7 @@ export const ALL_TASK_KEYS = {
   status: 'status',
 } as const;
 
-export interface Task {
+export type Task = {
   [ALL_TASK_KEYS.id]: string;
   [ALL_TASK_KEYS.title]: string;
   [ALL_TASK_KEYS.description]: string;

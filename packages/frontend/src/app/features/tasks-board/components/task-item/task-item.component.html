@@ -1,8 +1,6 @@
 @let data = taskData();
 <mat-card
   class="card"
-  (click)="selectItem($event)"
-  (dblclick)="handleDblClick($event)"
   [class.selected]="isSelected()"
 >
   <mat-card-header class="card__title">

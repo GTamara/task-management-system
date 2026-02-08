@@ -32,6 +32,14 @@ module.exports = defineConfig([
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-unused-expressions": ["error", {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }],
+
+      "@typescript-eslint/prefer-regexp-exec": "off",
+      "prefer-regex-literals": "off",
     },
   },
   {

@@ -1,4 +1,28 @@
+$color: var(--mat-sys-secondary-container);
+$hover-color: var(--mat-sys-inverse-on-surface);
+
 :host {
   position: relative;
-  display: block;
+  display: flex;
+}
+
+.add-task-btn {
+  width: auto;
+  height: auto;
+  line-height: 20px;
+  outline: $color solid 1px;
+  transition: outline 0.3s ease;
+
+  &:hover {
+    outline-color: $hover-color;
+  }
+}
+
+.add-task-icon {
+  color: $color;
+  transition: outline 0.3s ease;
+
+  &:hover {
+    color: $hover-color;
+  }
 }

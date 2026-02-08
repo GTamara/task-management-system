@@ -7,6 +7,9 @@
 }
 
 .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   white-space: normal;
   box-shadow: 0 1px 1px var(--shadow-color);
 }
@@ -45,6 +48,5 @@
   flex: 1;
   overflow: auto;
   background-color: var(--mat-sys-background);
-  padding: 1rem;
   box-sizing: border-box;
 }

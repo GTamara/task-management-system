@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { TasksStoreService } from '@features/tasks-board/services/tasks-store-service/tasks-store.service';
 import { SpinnerComponent } from '@lib/components/spinner/spinner';
 import { TaskItemComponent } from '../task-item/task-item.component';
@@ -9,6 +9,9 @@ import { FiltersState } from '@features/tasks-board/types/filters-types';
 import { SortState } from '@lib/components/filter-menu/sort-types';
 import { PRIORITY_CONFIG } from '@features/tasks-board/constants/priority-config';
 import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
+import { Router } from '@angular/router';
+import { ERoute } from '@routing/types';
+import { TasksViewStateService } from '@features/tasks-board/services/tasks-view-state/tasks-view-state.service';
 @Component({
   selector: 'app-tasks-list',
   imports: [
@@ -24,9 +27,23 @@ import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
 export class TasksListComponent {
 
   private readonly store = inject(TasksStoreService);
+  private readonly router = inject(Router);
+  private readonly tasksViewStateService = inject(TasksViewStateService);
 
   protected readonly storedTasks = this.store.tasksSignal;
   protected readonly isLoadingSignal = this.store.isLoadingSignal;
+
+  protected readonly selectedTaskId = signal<Task['id'] | null>(null);
+
+  constructor() {
+    effect(() => {
+      const isTaskDetailViewActive = this.tasksViewStateService.isTaskDetailViewActiveSignal();
+
+      if (!isTaskDetailViewActive) {
+        this.selectedTaskId.set(null);
+      }
+    })
+  }
 
   private readonly filtersState = signal<FiltersState>({
     priority: null,
@@ -53,23 +70,18 @@ export class TasksListComponent {
     if (filters.search) {
       tasks = this.searchByTitleOrDescription(filters.search, tasks);
     }
-
     if (filters.status) {
       tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.status, filters.status, tasks);
     }
-
     if (filters.priority) {
       tasks = this.filterByStatusOrPriority(ALL_TASK_KEYS.priority, filters.priority, tasks);
     }
-
     if (filters.createdAt) {
       tasks = this.filterByDate(filters.createdAt, tasks);
     }
 
     const sortSTate = this.sortState();
-
     tasks = this.sortData(sortSTate, tasks);
-
     return tasks;
   });
 
@@ -85,6 +97,11 @@ export class TasksListComponent {
       ...this.sortState(),
       ...evt,
     });
+  }
+
+  selectTask (id: Task['id']) {
+    this.selectedTaskId.set(id);
+    this.router.navigate([ERoute.TASKS_BOARD, id]);
   }
 
   private searchByTitleOrDescription (value: string, tasks: Task[]) {
