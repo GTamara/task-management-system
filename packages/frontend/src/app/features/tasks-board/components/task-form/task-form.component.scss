@@ -1,4 +1,32 @@
+@use '@angular/material' as mat;
+
 :host {
   position: relative;
   display: block;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-block-start: 1.5rem;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--mat-sys-primary);
+    text-align: center;
+    line-height: 1;
+  }
+
+  &__submit {
+    @include mat.button-overrides((
+      filled-container-height: 40px,
+    ));
+
+  }
 }

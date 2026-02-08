@@ -1,10 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Task } from '../../types';
+import { EPriority, EStatus, Task } from '../../types';
 import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { TasksApiService } from '../tasks-api-service/tasks-api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ToastService } from '@core/services/toast-service/toast.service';
+import { TaskFormService } from '../task-form-service/task-form.service';
+import { TaskFormGroup } from '@features/tasks-board/types/task-form';
+import { generateId } from '@lib/utils/generate-id';
 
 interface State {
   tasks: Task[] | undefined;
@@ -23,6 +26,9 @@ export class TasksStoreService extends ComponentStore<State> {
 
   private readonly api = inject(TasksApiService);
   private readonly toastService = inject(ToastService);
+  private readonly formService = inject(TaskFormService);
+
+  readonly taskForm: TaskFormGroup = this.formService.getTaskForm();
 
   constructor() {
     super(DEFAULT_STATE);
@@ -50,14 +56,41 @@ export class TasksStoreService extends ComponentStore<State> {
       );
     }),
     tap(tasks => {
-      // this.updateIsLoading(false);
-      // this.updateTasks(tasks);
       this.patchState({
         isLoading: false,
         tasks,
       });
     }),
-  ))
+  ));
+
+  readonly createTask = this.effect((trigger$: Observable<void>) => {
+    return trigger$.pipe(
+      tap(() => this.updateIsLoading(true)),
+      switchMap(() => {
+        const formData = this.taskForm.getRawValue();
+        const task: Task = {
+          id: generateId(),
+          title: formData.title,
+          description: formData.description,
+          createdAt: new Date().toISOString(),
+          status: formData.status ?? EStatus.NONE,
+          priority: formData.priority ?? EPriority.NONE,
+        }
+
+        return this.api.createTask(task).pipe(
+          catchError(e => {
+            this.toastService.showError('Ошибка создания задачи');
+            console.error(e);
+            return of(null);
+          })
+        );
+      }),
+      tap(() => {
+        this.toastService.showSuccess('Задача успешносоздана');
+        this.getTasks();
+      })
+    )
+  })
 
   private readonly updateIsLoading = this.updater((state, isLoading: boolean) => {
     return {

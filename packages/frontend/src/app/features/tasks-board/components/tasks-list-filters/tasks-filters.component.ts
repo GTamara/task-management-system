@@ -9,7 +9,7 @@ import { ALL_TASK_KEYS, EPriority, EStatus } from '@features/tasks-board/types';
 import { FiltersState } from '@features/tasks-board/types/filters-types';
 import { DateRangeFilterComponent } from '@lib/components/date-range-filter/date-range-filter.component';
 import { DateRangeValues } from '@lib/components/date-range-filter/date-range-filter.types';
-import { DropdownFilterComponent } from '@lib/components/dropdown-filter/dropdown-filter.component';
+import { ConfigurableSelectComponent } from '@lib/components/dropdown-filter/configurable-select.component';
 import { SortMenuComponent } from '@lib/components/filter-menu/sort-menu.component';
 import { SortState } from '@lib/components/filter-menu/sort-types';
 import { SearchComponent } from '@lib/components/search/search.component';
@@ -17,7 +17,7 @@ import { SearchComponent } from '@lib/components/search/search.component';
 @Component({
   selector: 'app-tasks-filters',
   imports: [
-    DropdownFilterComponent,
+    ConfigurableSelectComponent,
     DateRangeFilterComponent,
     SearchComponent,
     SortMenuComponent,
@@ -70,7 +70,6 @@ export class TasksFiltersComponent {
   }
 
   protected searchChanged(search: string | null): void {
-    console.log(search);
     this.filtersStateChanged.emit({ search });
   }
 

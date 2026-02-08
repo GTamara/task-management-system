@@ -4,26 +4,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { VisualEntityConfig } from '@lib/types/types';
 
-export type FilterOption<T> = VisualEntityConfig & { value: T };
+export type DropdownOption<T> = VisualEntityConfig & { value: T };
 @Component({
-  selector: 'app-dropdown-filter',
+  selector: 'app-configurable-select',
   imports: [
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
   ],
-  templateUrl: './dropdown-filter.component.html',
-  styleUrl: './dropdown-filter.component.scss',
+  templateUrl: './configurable-select.component.html',
+  styleUrl: './configurable-select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownFilterComponent<T extends string> implements OnInit {
+export class ConfigurableSelectComponent<T extends string> implements OnInit {
   config = input.required<Record<T, VisualEntityConfig>>();
   value = input<T | null>(null);
   label = input.required<string>();
+  labelIcon = input<string>();
 
   newValueSelected = output<T | null>();
 
-  protected options: FilterOption<T>[] = [];
+  protected options: DropdownOption<T>[] = [];
   protected readonly selectedValue = signal<T | null>(null);
 
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class DropdownFilterComponent<T extends string> implements OnInit {
 
   private getOptions<T extends string> (
     config: Record<T, VisualEntityConfig>
-  ): FilterOption<T>[] {
+  ): DropdownOption<T>[] {
     return Object.keys(config)
       .map(key => {
         const typedKey = key as T;

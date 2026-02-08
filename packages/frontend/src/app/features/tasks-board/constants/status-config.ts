@@ -36,5 +36,12 @@ export const STATUS_CONFIG: Record<EStatus, VisualEntityConfig> = {
     bgColor: '#E8F5E9',
     label: 'Done',
     order: 5
+  },
+  [EStatus.NONE]: {
+    icon: 'remove',
+    bgColor: '#fff',
+    color: '#617374',
+    label: 'None',
+    order: 6
   }
 };

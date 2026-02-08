@@ -1,6 +1,11 @@
+@let icon = labelIcon();
+
 <mat-form-field class="filter-field">
   <mat-label class="filter-label">
-    <mat-icon>filter_list</mat-icon>
+    @if (icon) {
+      <mat-icon>{{ icon }}</mat-icon>
+    }
+
     {{ label() }}
   </mat-label>
   <mat-select

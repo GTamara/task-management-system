@@ -29,5 +29,12 @@ export const PRIORITY_CONFIG: Record<EPriority, VisualEntityConfig> = {
     color: '#fff',
     label: 'Urgent',
     order: 4,
-  }
+  },
+  [EPriority.NONE]: {
+    icon: 'remove',
+    bgColor: '#fff',
+    color: '#617374',
+    label: 'None',
+    order: 5,
+  },
 };

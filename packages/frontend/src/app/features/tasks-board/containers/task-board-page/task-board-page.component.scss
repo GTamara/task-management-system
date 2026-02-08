@@ -2,21 +2,20 @@
   position: relative;
   display: block;
   height: 100%;
-
-  // display: flex;
-  flex-grow: 1;
-
-  // flex-wrap: nowrap;
 }
 
 mat-sidenav-container {
-  padding: 1rem;
+  block-size: 100%;
 }
 
 mat-sidenav {
   box-shadow: 0 0 3px var(--shadow-color);
   background-color: var(--mat-sys-surface-container);
   border-radius: 0 !important;
+  padding: 1rem;
+}
+
+mat-sidenav-content {
   padding: 1rem;
 }
 

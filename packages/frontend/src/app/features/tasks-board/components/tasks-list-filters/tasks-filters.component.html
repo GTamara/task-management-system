@@ -1,13 +1,17 @@
 <section class="filters">
-  <app-dropdown-filter
+  <app-configurable-select
     [config]="STATUS_CONFIG"
+    labelIcon="filter_list"
     label="Статус"
+    aria-label="Фильтр по статусу задачи"
     (newValueSelected)="newStatusSelected($event)"
   />
 
-  <app-dropdown-filter
+  <app-configurable-select
     [config]="PRIORITY_CONFIG"
+    labelIcon="filter_list"
     label="Приоритет"
+    aria-label="Фильтр по приоритету задачи"
     (newValueSelected)="newPrioritySelected($event)"
   />
 

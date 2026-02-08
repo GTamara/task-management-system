@@ -39,10 +39,7 @@
     calendar-navigation-button-icon-color: var(--mat-sys-primary),
   ));
 
-  /* TODO: Правило добавлено, т.к. toggle-icon-color не работает в Material 19.
-    Убрать это правило после перехода на Material 21!
-  */
-  --mdc-icon-button-icon-color: var(--mat-sys-primary);
+
 }
 
 div.mat-mdc-select-panel {

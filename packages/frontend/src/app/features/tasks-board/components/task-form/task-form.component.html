@@ -1,0 +1,72 @@
+<h1 class="form__title">
+  <mat-icon>description</mat-icon>
+  Новая Задача
+</h1>
+{{ mode() }}
+<form
+  class="form"
+  [formGroup]="form"
+  (ngSubmit)="submitForm()"
+>
+  <mat-form-field
+    class="full-width"
+    subscriptSizing="fixed"
+  >
+    <mat-label>Название задачи</mat-label>
+    <input
+      matInput
+      formControlName="title"
+    />
+    <mat-icon
+      primary-color
+      matSuffix
+    >
+      title
+    </mat-icon>
+
+    @if (form.controls.title.hasError('required')) {
+      <mat-error>Необходимо заполнить название задачи</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      rows="10"
+      placeholder="Describe your investment strategy"
+    ></textarea>
+    <mat-icon
+      matSuffix
+      primary-color
+    >
+      description
+    </mat-icon>
+  </mat-form-field>
+
+  <app-form-configurable-select
+    [control]="form.controls.status"
+    [config]="STATUS_CONFIG"
+    labelIcon="local_fire_department"
+    label="Статус"
+    aria-label="Статус задачи"
+  />
+
+  <app-form-configurable-select
+    [control]="form.controls.priority"
+    [config]="PRIORITY_CONFIG"
+    labelIcon="checklist"
+    label="Приоритет"
+    aria-label="Приоритет задачи"
+  />
+
+  <button
+    class="form__submit"
+    mat-flat-button
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    Создать задачу
+  </button>
+</form>

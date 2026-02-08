@@ -38,6 +38,7 @@ export enum EPriority {
   MEDIUM = 'medium',
   HIGH = 'high',
   URGENT = 'urgent',
+  NONE = 'none',
 }
 
 export enum EStatus {
@@ -46,5 +47,6 @@ export enum EStatus {
   DONE = 'done',
   REVIEW = 'review',
   BACKLOG = 'backlog',
+  NONE = 'none',
 }
 
