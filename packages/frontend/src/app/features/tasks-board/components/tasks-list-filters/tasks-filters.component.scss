@@ -1,0 +1,45 @@
+$vertical-gap: 0.5rem;
+
+:host {
+  position: relative;
+  display: block;
+  margin-block-end: $vertical-gap;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 2fr));
+  gap: 1rem;
+  place-items: stretch;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-block-start: $vertical-gap;
+}
+
+/* Стили для отзывчивого дизайна */
+
+:host {
+  container-type: inline-size;
+  container-name: host-container;
+}
+
+@container host-container (width <= 800px) {
+  .filters {
+    grid-template-columns: repeat(2, minmax(180px, 4fr));
+  }
+}
+
+@container host-container (width <= 500px) {
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+
+  }
+}

@@ -1,0 +1,13 @@
+:host {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.tasks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  place-items: stretch
+}

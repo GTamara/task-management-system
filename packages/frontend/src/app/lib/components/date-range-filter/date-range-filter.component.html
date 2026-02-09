@@ -1,0 +1,23 @@
+<mat-form-field>
+  <mat-label>Укажите период</mat-label>
+  <mat-date-range-input
+    [formGroup]="rangeForm"
+    [rangePicker]="picker"
+  >
+    <input
+      formControlName="startDate"
+      matStartDate
+      placeholder="С"
+    />
+    <input
+      formControlName="endDate"
+      matEndDate
+      placeholder="По"
+    />
+  </mat-date-range-input>
+  <mat-datepicker-toggle
+    matIconSuffix
+    [for]="picker"
+  ></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>

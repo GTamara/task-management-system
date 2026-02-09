@@ -1,0 +1,52 @@
+:host {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 236px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: normal;
+  box-shadow: 0 1px 1px var(--shadow-color);
+}
+
+.title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--accent-font-family);
+  font-style: italic;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0.5rem 0;
+
+  &__name {
+    position: relative;
+    background: var(--app-title-gradient);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: inherit;
+    letter-spacing: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+  }
+
+  &__shadow {
+    position: absolute;
+    top: 0.5px;
+    left: 0;
+    color: transparent;
+    text-shadow: 0 0 1px #fff;
+  }
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  background-color: var(--mat-sys-background);
+  box-sizing: border-box;
+}

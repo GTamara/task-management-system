@@ -1,0 +1,26 @@
+@let tasks = displayedTasks();
+@let isLoading = isLoadingSignal();
+@let selectedId = selectedTaskId();
+
+<app-tasks-filters
+  (filtersStateChanged)="updateFiltersState($event)"
+  (sortStateChanged)="updateSortState($event)"
+/>
+
+@if (!isLoading) {
+  <section class="tasks-container">
+    @if (tasks?.length) {
+      @for (item of tasks; track item.id) {
+        <app-task-item
+          [taskData]="item"
+          [isSelected]="item.id === selectedId"
+          (click)="selectTask(item.id)"
+        />
+      }
+    } @else {
+      <app-empty-data-message />
+    }
+  </section>
+} @else {
+  <app-spinner />
+}

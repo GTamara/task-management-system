@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+@use './themes/theme-turquoise' as theme_turquoise;
+
+$colors-theme-light: mat.define-theme((
+  color: (theme-type: light,
+      primary: theme_turquoise.$primary-palette,
+      tertiary: theme_turquoise.$tertiary-palette,
+    ),
+  ));
+
+:root {
+  --shadow-color: #5d5d5d;
+  --border-light-color: #a3ceca;
+  --toolbar-gradient: linear-gradient(30deg,
+    #1e3a5f 0%,
+    #1a5276 25%,
+    #1d8a8c 50%,
+    #1a5276 75%,
+    #1e3a5f 100%
+  );
+
+  --app-title-gradient: linear-gradient(
+    155deg,
+    #268650,
+    #94abb4,
+    #209fad,
+    #6da3b4,
+    #a8b6a3
+  );
+
+}

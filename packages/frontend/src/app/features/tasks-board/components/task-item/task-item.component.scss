@@ -1,0 +1,73 @@
+@use 'mixins' as mixins;
+
+:host {
+  position: relative;
+  display: contents;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.card {
+  position: relative;
+  padding: 0.8rem;
+  cursor: pointer;
+  border-left: 1px solid var(--mat-sys-inverse-primary);
+  border-radius: 0.4rem;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 3px var(--mat-sys-outline-variant);
+
+  &:hover {
+    box-shadow:
+      0 0 6px var(--mat-sys-secondary-fixed),
+      0 0 8px var(--mat-sys-outline-variant),
+      0 0 100px var(--mat-sys-surface-variant) inset,
+  }
+
+  &.selected {
+    background-color: var(--card-selected-background);
+
+    &:hover {
+      box-shadow: 0 0 6px #ecaeee, 0 0 8px #e8d467, 0 0 100px #e3e1ca inset;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    gap: 1rem;
+    flex-grow: 0;
+
+    // word-break: break-word; <- свойство работает лучше, но, ксожалению, оно deprecated
+    overflow-wrap: anywhere;
+  }
+
+  &__content {
+    font-size: 0.9rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+
+  &__actions {
+    justify-content: space-between;
+    margin-block-start: auto;
+    padding: 0;
+    min-height: auto;
+  }
+
+  &__date {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--mat-sys-outline);
+  }
+}
+
+.cropped-text {
+  @include mixins.cropped-multiline-text(3);
+
+  text-wrap: balance;
+}
+

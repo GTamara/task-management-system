@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use './fonts' as *;
+@use './colors' as *;
+@use './vars' as *;
+@use './mixins' as *;
+@use './theme-settings' as *;
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--regular-font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+mat-card-title {
+  font-family: var(--accent-font-family);
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+
+mat-card-title {
+  color: var(--mat-sys-primary);
+}
+
+mat-form-field {
+  width: 100%;
+  flex: 1 1 100%
+}
+
+[primary-color] {
+  color: var(--mat-sys-primary);
+}
+
+mat-error {
+  font-size: 0.8rem;
+}
+

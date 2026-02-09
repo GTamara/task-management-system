@@ -1,0 +1,51 @@
+@use '@angular/material' as mat;
+@use 'mixins' as mixins;
+
+:host {
+  position: relative;
+  display: flow;
+  text-align: end;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-block-start: 1.5rem;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--mat-sys-primary);
+    text-align: center;
+    line-height: 1;
+  }
+
+  &__submit {
+    @include mat.button-overrides((
+      filled-container-height: 40px,
+    ));
+  }
+}
+
+.actions {
+  display: inline-flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-block-end: 1rem;
+  transform: translateY(-100%);
+
+  .delete-btn {
+    @include mixins.custom-icon-button(30px, var(--mat-sys-error));
+  }
+
+  .edit-btn {
+    @include mixins.custom-icon-button(30px, var(--mat-sys-primary));
+  }
+}
+

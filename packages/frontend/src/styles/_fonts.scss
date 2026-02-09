@@ -1,0 +1,122 @@
+/* Cormorant Infant - Regular (normal) */
+@font-face {
+  font-family: 'Cormorant Infant';
+  src:
+    local('Cormorant Infant'),
+    local('CormorantInfant'),
+    local('Cormorant Infant Regular'),
+    local('CormorantInfant-Regular'),
+    url('/fonts/Cormorant_Infant/CormorantInfant-VariableFont_wght.ttf')
+      format('truetype-variations');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cormorant Infant - Italic */
+@font-face {
+  font-family: 'Cormorant Infant';
+  src:
+    local('Cormorant Infant Italic'),
+    local('CormorantInfant-Italic'),
+    url('/fonts/Cormorant_Infant/CormorantInfant-Italic-VariableFont_wght.ttf')
+      format('truetype-variations');
+  font-weight: 500 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sofia Sans";
+  src:
+    /* Вариативные имена */
+    local("Sofia Sans Variable"),
+    local("SofiaSans-Variable"),
+    local("Sofia Sans VF"),
+    local("SofiaSansVF"),
+    /* Обычные имена */
+    local("Sofia Sans"),
+    local("SofiaSans"),
+    /* Windows/Linux варианты */
+    local("Sofia Sans Regular"),
+    local("SofiaSans-Regular"),
+    local("SofiaSans Regular"),
+    url("/fonts/Sofia_Sans/SofiaSans-VariableFont_wght.ttf")
+      format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  font-stretch: 100% 200%;
+}
+
+@font-face {
+  font-family: "Sofia Sans";
+  src:
+    /* Вариативные имена */
+    local("Sofia Sans Variable Italic"),
+    local("SofiaSansVariable-Italic"),
+    local("Sofia Sans VF Italic"),
+    local("SofiaSansVF-Italic"),
+    /* Обычные имена Italic */
+    local("Sofia Sans Italic"),
+    local("SofiaSans-Italic"),
+    local("Sofia Sans-Italic"),
+    /* Без пробелов */
+    local("SofiaSansItalic"),
+    url("/fonts/Sofia_Sans/SofiaSans-Italic-VariableFont_wght.ttf")
+      format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Roboto;
+  src:
+    /* 1. ВАРИАТИВНЫЙ Roboto */
+    local("Roboto Variable"),
+    local("RobotoVariable"),
+    local("RobotoVF"),
+    local("Roboto VF"),
+    /* 2. ОБЫЧНЫЙ Roboto */
+    local("Roboto"),
+    local("Roboto Regular"),
+    local("Roboto-Regular"),
+    local("Roboto_Regular"),
+    /* 3. Roboto UI (Windows 10+) */
+    local("Roboto UI"),
+    local("RobotoUI"),
+    local("Roboto UI Regular"),
+    /* 4. Сегменты Roboto (Android) */
+    local("Roboto-Thin"),
+    local("Roboto-Light"),
+    local("Roboto-Medium"),
+    local("Roboto-Bold"),
+    local("Roboto-Black"),
+    url("/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf")
+      format("truetype-variations");
+  font-weight: 100 900; /* Полный диапазон весов */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Roboto;
+  src:
+    /* 1. Сначала ищем ВАРИАТИВНЫЙ курсив (если есть у пользователя) */
+    local("Roboto Variable Italic"),
+    local("RobotoVariable-Italic"),
+    local("RobotoVF-Italic"),
+    local("Roboto Italic Variable"),
+    local("RobotoItalic-Variable"),
+    /* 2. Потом ищем ОБЫЧНЫЙ курсив (более распространен) */
+    local("Roboto Italic"),
+    local("Roboto-Italic"),
+    local("RobotoItalic"),
+    local("Roboto UI Italic"),
+    url("/fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf")
+      format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}

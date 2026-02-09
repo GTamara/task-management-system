@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "frontend": "cd packages/frontend && npm start",
-    "backend": "cd packages/backend && npm start",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "frontend": "cd packages/frontend && yarn start",
+    "backend": "cd packages/backend && yarn start",
+    "dev": "concurrently \"yarn run backend\" \"yarn run frontend\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "yarn install && cd packages/frontend && yarn install && cd ../backend && yarn install",
+    "install:all": "yarn run setup",
+    "prepare": "husky"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tamara Gudkova <goodluck.tamara@yandex.ru>",
   "license": "ISC",
-  "dependencies": {
+  "main": "index.js",
+  "repository": "https://github.com/GTamara/task-management-system.git",
+  "devDependencies": {
+    "husky": "^9.1.7",
     "concurrently": "^9.2.1"
   }
 }

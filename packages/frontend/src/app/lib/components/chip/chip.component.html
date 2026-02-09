@@ -1,0 +1,13 @@
+@let config = chipConfig();
+
+<div
+  class="chip"
+  [style.background-color]="config.bgColor"
+  [style.color]="config.color"
+  [matTooltip]="config.label"
+>
+  <mat-icon>{{ config.icon }}</mat-icon>
+  @if (showLable()) {
+    <span>{{ config.label }}</span>
+  }
+</div>

@@ -1,0 +1,35 @@
+:host {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  margin-block: 2rem;
+
+  mat-spinner {
+    margin: auto;
+  }
+}
+
+.small {
+  mat-spinner {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.medium {
+  mat-spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.large {
+  mat-spinner {
+    width: 60px;
+    height: 60px;
+  }
+}

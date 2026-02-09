@@ -1,0 +1,37 @@
+<section class="filters">
+  <app-configurable-select
+    [config]="STATUS_CONFIG"
+    labelIcon="filter_list"
+    label="Статус"
+    aria-label="Фильтр по статусу задачи"
+    (newValueSelected)="newStatusSelected($event)"
+  />
+
+  <app-configurable-select
+    [config]="PRIORITY_CONFIG"
+    labelIcon="filter_list"
+    label="Приоритет"
+    aria-label="Фильтр по приоритету задачи"
+    (newValueSelected)="newPrioritySelected($event)"
+  />
+
+  <app-date-range-filter (dateRangeChanged)="newDateRangeSelected($event)" />
+  <app-search (searchChanged)="searchChanged($event)" />
+</section>
+<div class="actions">
+  <!-- <button
+    class="reset"
+    mat-icon-button
+    matTooltip="Сбросить фильтры"
+    (click)="resetAllFilters()"
+  >
+    <mat-icon>restart_alt</mat-icon>
+  </button> -->
+
+  <app-sort-menu
+    [fields]="SORT_FIELDS"
+    [defaultSortFiled]="SORT_FIELDS[0]"
+    matTooltip="Сортировать"
+    (sortChanged)="sortTasks($event)"
+  />
+</div>

@@ -1,0 +1,49 @@
+@use '@angular/material' as mat;
+@use './themes/theme-turquoise' as theme_turquoise;
+@use './colors' as *;
+
+:root {
+  color-scheme: light;
+
+  @include mat.theme((
+    color: (
+     primary: theme_turquoise.$primary-palette,
+      tertiary: theme_turquoise.$tertiary-palette,
+      theme-type: light,
+      use-system-variables: true,
+    ),
+    density: -5,
+  ));
+
+  @include mat.progress-spinner-overrides(
+    (active-indicator-color: var(---mat-snack-bar-button-color))
+  );
+
+  @include mat.toolbar-overrides((
+    container-background-color: var(--toolbar-gradient),
+    standard-height: 52px,
+    mobile-height: auto,
+  ));
+
+  @include mat.card-overrides((
+    title-text-line-height: 1.2,
+    title-text-font: var(--accent-font-family),
+    title-text-size: 1.4rem,
+    title-text-weight: 700,
+    elevated-container-color: #f0f9ff,
+  ));
+
+  @include mat.datepicker-overrides((
+    toggle-icon-color: var(--mat-sys-primary),
+    calendar-period-button-icon-color: var(--mat-sys-primary),
+    calendar-navigation-button-icon-color: var(--mat-sys-primary),
+  ));
+}
+
+div.mat-mdc-select-panel {
+  padding: 0 !important;
+}
+
+.mat-mdc-option {
+  min-height: 42px !important;
+}

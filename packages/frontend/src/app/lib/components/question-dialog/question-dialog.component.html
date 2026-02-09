@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>
+  {{ data.header }}
+</h1>
+
+<mat-dialog-content>
+  {{ data.text }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    error-color
+    mat-raised-button
+    (click)="confirm()"
+  >
+    {{ data.confirm }}
+  </button>
+  @if (!data.hideCancelButton) {
+    <button
+      class="cancel"
+      mat-dialog-close
+      mat-raised-button
+      cdkFocusInitial
+      (click)="cancel()"
+    >
+      Отмена
+    </button>
+  }
+</mat-dialog-actions>

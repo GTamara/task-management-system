@@ -1,0 +1,14 @@
+@mixin cropped-multiline-text($quantity) {
+    display: -webkit-box;
+    -webkit-line-clamp: $quantity;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@mixin custom-icon-button($size, $color) {
+    width: $size;
+    height: $size;
+    line-height: 1;
+    border: 1px solid $color;
+    color: $color;
+}
