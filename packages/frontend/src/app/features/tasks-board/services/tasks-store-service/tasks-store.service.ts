@@ -39,6 +39,11 @@ export class TasksStoreService extends ComponentStore<State> {
     { initialValue: [] }
   );
 
+  selectTaskByIdSignal (id: Task['id']) {
+    const tasks = this.tasksSignal() ?? [];
+    return tasks.find(task => task.id === id);
+  }
+
   readonly isLoadingSignal = toSignal(
     this.select(state => state.isLoading),
     { initialValue: false }

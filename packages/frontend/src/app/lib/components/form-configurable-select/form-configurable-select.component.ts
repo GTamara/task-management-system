@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ConfigurableSelectComponent } from '../dropdown-filter/configurable-select.component';
+import { ConfigurableSelectComponent } from '../configurable-select/configurable-select.component';
 import { VisualEntityConfig } from '@lib/types/types';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,9 +27,16 @@ export class FormConfigurableSelectComponent<T extends string> {
   control = input.required<FormControl<T | null>>();
 
   config = input.required<Record<T, VisualEntityConfig>>();
-  value = input<T | null>(null);
+  // value = input<T | null>(null);
   label = input.required<string>();
   labelIcon = input<string>();
+
+  // currentControlValue = toSignal(
+  //   this.control().valueChanges.pipe(
+  //     startWith(null)
+  //   ),
+  //   { injector: inject(Injector), requireSync: true }
+  // );
 
   protected onValueSelected(newValue: T | null): void {
     const formControl = this.control();

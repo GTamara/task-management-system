@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, OnInit, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, OnInit, output, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,9 +27,17 @@ export class ConfigurableSelectComponent<T extends string> implements OnInit {
   protected options: DropdownOption<T>[] = [];
   protected readonly selectedValue = signal<T | null>(null);
 
+  constructor () {
+    effect(() => {
+      this.selectedValue.set(this.value());
+    });
+
+    effect(() => console.log('value', this.value()))
+  }
+
   ngOnInit(): void {
     this.options = this.getOptions<T>(this.config());
-    this.selectedValue.set(this.value());
+    // this.selectedValue.set(this.value());
   }
 
   protected onValueSelected(newValue: T | null): void {
