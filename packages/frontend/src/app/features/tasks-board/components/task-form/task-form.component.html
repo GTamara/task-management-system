@@ -1,4 +1,5 @@
 @let titles = formTitles();
+
 <section class="actions">
   <button
     class="edit-btn"
@@ -43,7 +44,7 @@
       <mat-error>Необходимо заполнить название задачи</mat-error>
     }
 
-    @if (form.controls.title.hasError('minLength')) {
+    @if (form.controls.title.hasError('minlength')) {
       <mat-error>Минимальное количество символов: 5</mat-error>
     }
   </mat-form-field>

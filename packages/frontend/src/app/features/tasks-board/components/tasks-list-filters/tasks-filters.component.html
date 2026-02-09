@@ -19,14 +19,14 @@
   <app-search (searchChanged)="searchChanged($event)" />
 </section>
 <div class="actions">
-  <button
+  <!-- <button
     class="reset"
     mat-icon-button
     matTooltip="Сбросить фильтры"
     (click)="resetAllFilters()"
   >
     <mat-icon>restart_alt</mat-icon>
-  </button>
+  </button> -->
 
   <app-sort-menu
     [fields]="SORT_FIELDS"

@@ -15,7 +15,6 @@ import { ConfigurableSelectComponent } from '@lib/components/configurable-select
 import { FormControlValueType } from '@lib/types/form-control-value-type';
 import { ERoute } from '@routing/types';
 @Component({
-  selector: 'app-task-form',
   imports: [
     ConfigurableSelectComponent,
 

@@ -1,13 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { EPriority, EStatus, Task } from '../../types';
-import { catchError, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, exhaustMap, filter, finalize, Observable, of, switchMap, tap } from 'rxjs';
 import { TasksApiService } from '../tasks-api-service/tasks-api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ToastService } from '@core/services/toast-service/toast.service';
 import { TaskFormService } from '../task-form-service/task-form.service';
 import { TaskFormGroup } from '@features/tasks-board/types/task-form';
 import { generateId } from '@lib/utils/generate-id';
+import { MatDialog } from '@angular/material/dialog';
+import { QuestionDialogComponent } from '@lib/components/question-dialog/question-dialog.component';
+import { ERoute } from '@routing/types';
+import { Router } from '@angular/router';
 
 interface State {
   tasks: Task[] | undefined;
@@ -27,6 +31,8 @@ export class TasksStoreService extends ComponentStore<State> {
   private readonly api = inject(TasksApiService);
   private readonly toastService = inject(ToastService);
   private readonly formService = inject(TaskFormService);
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
 
   readonly taskForm: TaskFormGroup = this.formService.taskForm;
 
@@ -39,7 +45,7 @@ export class TasksStoreService extends ComponentStore<State> {
     { initialValue: [] }
   );
 
-  selectTaskByIdSignal (id: Task['id']) {
+  selectTaskByIdSignal(id: Task['id']) {
     const tasks = this.tasksSignal() ?? [];
     return tasks.find(task => task.id === id);
   }
@@ -114,12 +120,13 @@ export class TasksStoreService extends ComponentStore<State> {
         priority: formData.priority ?? EPriority.NONE,
       };
       return this.api.updateTask(taskData).pipe(
-      catchError(e => {
-        this.toastService.showError('Ошибка обновления задачи');
-        console.error(e);
-        return of(null);
-      })
-    )}),
+        catchError(e => {
+          this.toastService.showError('Ошибка обновления задачи');
+          console.error(e);
+          return of(null);
+        })
+      )
+    }),
     tap(() => {
       this.updateIsLoading(false);
       this.toastService.showSuccess('Задача успешно обновлена');
@@ -127,22 +134,57 @@ export class TasksStoreService extends ComponentStore<State> {
     }),
   ));
 
+  private removeTaskFromStore (id: string): void {
+    this.patchState(state => ({
+      tasks: state.tasks?.filter(task => task.id !== id)
+    }));
+  }
+
   readonly deleteTask = this.effect((id$: Observable<Task['id']>) => id$.pipe(
-    tap(() => this.updateIsLoading(true)),
-    switchMap(id => this.api.deleteTask(id).pipe(
+    exhaustMap(id => {
+      return this.confirmDelete().pipe(
+        filter(Boolean),
+        switchMap(() => this.performDeleting(id))
+      );
+    })
+  ));
+
+  private performDeleting (id: string) {
+    this.updateIsLoading(true);
+
+    return this.api.deleteTask(id).pipe(
+      tap(() => {
+        this.toastService.showSuccess('Задача удалена');
+        this.getTasks();
+        this.removeTaskFromStore(id);
+        this.formService.resetForm();
+        this.router.navigate([ERoute.TASKS_BOARD]);
+      }),
       catchError(e => {
         this.toastService.showError('Ошибка удаления задачи');
         console.error(e);
-        return of(null);
+        return EMPTY;
       }),
-    )),
-    tap(() => {
-      this.toastService.showSuccess('Задача успешно удалена');
-      this.updateIsLoading(false);
-      this.formService.resetForm();
-      this.getTasks();
-    }),
-  ));
+      finalize(() => this.updateIsLoading(false))
+    )
+  }
+
+  private confirmDelete() {
+    const dialogRef = this.dialog.open(
+      QuestionDialogComponent,
+      {
+        data: {
+          header: 'Внимание!',
+          text: 'Вы действительно хотите удалить задачу?',
+          confirm: 'Да',
+          cancel: 'Нет',
+          hideCancelButton: false
+        },
+        width: '400px',
+      }
+    );
+    return dialogRef.afterClosed();
+  }
 
   private readonly updateIsLoading = this.updater((state, isLoading: boolean) => {
     return {

@@ -9,7 +9,6 @@ import { ERoute } from '@routing/types';
 import { TasksViewStateService as TaskViewStateService } from '@features/tasks-board/services/tasks-view-state/tasks-view-state.service';
 
 @Component({
-  selector: 'app-task-board-page',
   imports: [
     TasksListComponent,
 

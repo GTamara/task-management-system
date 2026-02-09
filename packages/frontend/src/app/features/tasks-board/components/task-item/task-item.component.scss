@@ -67,5 +67,7 @@
 
 .cropped-text {
   @include mixins.cropped-multiline-text(3);
+
+  text-wrap: balance;
 }
 
