@@ -1,6 +1,8 @@
+@let titles = formTitles();
+
 <h1 class="form__title">
   <mat-icon>description</mat-icon>
-  {{ title() }}
+  {{ titles?.formTitle }}
 </h1>
 
 <form
@@ -46,28 +48,36 @@
     </mat-icon>
   </mat-form-field>
 
-  <app-form-configurable-select
-    [control]="form.controls.status"
+  <app-configurable-select
     [config]="STATUS_CONFIG"
+    [value]="form.controls.status.value"
+    [isDisabled]="form.disabled"
     labelIcon="local_fire_department"
     label="Статус"
     aria-label="Статус задачи"
+    (newValueSelected)="onDropdownValueSelected(form.controls.status, $event)"
   />
 
-  <app-form-configurable-select
-    [control]="form.controls.priority"
+  <app-configurable-select
     [config]="PRIORITY_CONFIG"
+    [value]="form.controls.priority.value"
+    [isDisabled]="form.disabled"
     labelIcon="checklist"
     label="Приоритет"
     aria-label="Приоритет задачи"
+    (newValueSelected)="onDropdownValueSelected(form.controls.priority, $event)"
   />
 
-  <button
-    class="form__submit"
-    mat-flat-button
-    type="submit"
-    [disabled]="form.invalid"
-  >
-    Создать задачу
-  </button>
+  @let submitBtnTitle = titles?.submitBtnTitle;
+
+  @if (submitBtnTitle) {
+    <button
+      class="form__submit"
+      mat-flat-button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      {{ submitBtnTitle }}
+    </button>
+  }
 </form>

@@ -10,6 +10,7 @@
   </mat-label>
   <mat-select
     [value]="selectedValue()"
+    [disabled]="isDisabled()"
     (selectionChange)="onValueSelected($event.value)"
   >
     <mat-select-trigger>

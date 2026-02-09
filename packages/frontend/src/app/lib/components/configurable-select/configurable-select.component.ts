@@ -21,6 +21,7 @@ export class ConfigurableSelectComponent<T extends string> implements OnInit {
   value = input<T | null>(null);
   label = input.required<string>();
   labelIcon = input<string>();
+  isDisabled = input<boolean>(false);
 
   newValueSelected = output<T | null>();
 
@@ -31,13 +32,10 @@ export class ConfigurableSelectComponent<T extends string> implements OnInit {
     effect(() => {
       this.selectedValue.set(this.value());
     });
-
-    effect(() => console.log('value', this.value()))
   }
 
   ngOnInit(): void {
     this.options = this.getOptions<T>(this.config());
-    // this.selectedValue.set(this.value());
   }
 
   protected onValueSelected(newValue: T | null): void {

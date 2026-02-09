@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,12 +10,12 @@ import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
 import { TasksStoreService } from '@features/tasks-board/services/tasks-store-service/tasks-store.service';
 import { Task } from '@features/tasks-board/types';
 import { TaskFormMode } from '@features/tasks-board/types/task-form';
-import { FormConfigurableSelectComponent } from '@lib/components/form-configurable-select/form-configurable-select.component';
-
+import { ConfigurableSelectComponent } from '@lib/components/configurable-select/configurable-select.component';
+import { FormControlValueType } from '@lib/types/form-control-value-type';
 @Component({
   selector: 'app-task-form',
   imports: [
-    FormConfigurableSelectComponent,
+    ConfigurableSelectComponent,
 
     ReactiveFormsModule,
 
@@ -40,19 +40,26 @@ export class TaskFormComponent {
   STATUS_CONFIG = STATUS_CONFIG;
   PRIORITY_CONFIG = PRIORITY_CONFIG;
 
-  constructor () {
+  constructor() {
     effect(() => {
       const task = this.taskItem();
-      if (!task) return;
       const mode = this.mode();
 
-      if (mode === 'view' || mode === 'edit') this.fillForm(task);
-    })
-
-    effect(() => {
-      const mode = this.mode();
-      if (mode === 'view') this.form.disable();
-    })
+      switch (mode) {
+        case 'new':
+          this.clearForm();
+          this.form.enable();
+          break;
+        case 'view':
+          this.form.disable();
+          !!task && this.fillForm(task);
+          break;
+        case 'edit':
+          this.form.enable();
+          !!task && this.fillForm(task);
+          break;
+      }
+    });
   }
 
   protected taskItem = computed(() => {
@@ -62,21 +69,60 @@ export class TaskFormComponent {
     return this.store.selectTaskByIdSignal(taskId);
   });
 
-  protected title = computed(() => {
+  protected formTitles = computed(() => {
     const mode = this.mode();
 
-    if (!mode) return;
-    if (mode === 'new') return 'Новая задача';
-    if (mode === 'view') return 'Просмотр задачи';
-    if (mode === 'edit') return 'Редактирование задачи';
-    return;
-  })
+    if (!mode) {
+      console.error(`Mode ${mode} is not supported`);
+      return {};
+    }
 
-  submitForm () {
+    switch (mode) {
+      case 'new':
+        return {
+          formTitle: 'Новая задача',
+          submitBtnTitle: 'Создать задачу'
+        };
+      case 'view':
+        return {
+          formTitle: 'Просмотр задачи',
+        };
+      case 'edit':
+        return {
+          formTitle: 'Редактирование задачи',
+          submitBtnTitle: 'Сохранить изменения'
+        };
+    }
+  });
+
+  protected onDropdownValueSelected<T>(
+    control: T,
+    value: FormControlValueType<T>
+  ): void {
+    /*
+     * или можно изменить тип функции на onDropdownValueSelected<T rxtends FormControl>,
+     * тогда не нужен будет if
+     */
+    if (control instanceof FormControl) {
+      control.setValue(value);
+      control.markAsTouched();
+    }
+  }
+
+  submitForm() {
     this.store.createTask();
   }
 
-  private fillForm (task: Task) {
+  private fillForm(task: Task) {
     this.form.patchValue(task);
+  }
+
+  private clearForm() {
+    this.form.reset({
+      title: '',
+      description: '',
+      status: null,
+      priority: null
+    });
   }
 }
