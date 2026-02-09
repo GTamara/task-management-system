@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,6 +38,23 @@ export class TaskFormComponent {
 
   STATUS_CONFIG = STATUS_CONFIG;
   PRIORITY_CONFIG = PRIORITY_CONFIG;
+
+  protected title = computed(() => {
+    const mode = this.mode();
+
+    if (!mode) return;
+
+    if (mode === 'new') {
+      return 'Новая задача';
+    }
+    if (mode === 'view') {
+      return 'Просмотр задачи';
+    }
+    if (mode === 'edit') {
+      return 'Редактирование задачи';
+    }
+    return
+  })
 
   submitForm () {
     this.store.createTask();

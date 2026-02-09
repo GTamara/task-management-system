@@ -28,7 +28,7 @@ export class TasksStoreService extends ComponentStore<State> {
   private readonly toastService = inject(ToastService);
   private readonly formService = inject(TaskFormService);
 
-  readonly taskForm: TaskFormGroup = this.formService.getTaskForm();
+  readonly taskForm: TaskFormGroup = this.formService.taskForm;
 
   constructor() {
     super(DEFAULT_STATE);
@@ -86,10 +86,11 @@ export class TasksStoreService extends ComponentStore<State> {
         );
       }),
       tap(() => {
-        this.toastService.showSuccess('Задача успешносоздана');
+        this.toastService.showSuccess('Задача успешно создана');
+        this.formService.resetForm();
         this.getTasks();
       })
-    )
+    );
   })
 
   private readonly updateIsLoading = this.updater((state, isLoading: boolean) => {

@@ -1,7 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { EPriority, EStatus } from '.';
 
-export type TaskFormMode = 'create' | 'edit' | 'view';
+export type TaskFormMode = 'new' | 'edit' | 'view';
 
 export type TaskFormGroup = FormGroup<{
     title: FormControl<string>;

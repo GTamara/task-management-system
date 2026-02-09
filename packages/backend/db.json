@@ -159,14 +159,6 @@
       "priority": "medium",
       "createdAt": "2026-02-03",
       "status": "new"
-    },
-    {
-      "id": "1770575764230",
-      "title": "sdsg",
-      "description": "sgsdg",
-      "createdAt": "2026-02-08T18:36:04.230Z",
-      "status": "in-progress",
-      "priority": "low"
     }
   ]
 }

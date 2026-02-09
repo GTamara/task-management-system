@@ -1,17 +1,14 @@
 <h1 class="form__title">
   <mat-icon>description</mat-icon>
-  Новая Задача
+  {{ title() }}
 </h1>
-{{ mode() }}
+
 <form
   class="form"
   [formGroup]="form"
   (ngSubmit)="submitForm()"
 >
-  <mat-form-field
-    class="full-width"
-    subscriptSizing="fixed"
-  >
+  <mat-form-field subscriptSizing="fixed">
     <mat-label>Название задачи</mat-label>
     <input
       matInput
@@ -27,14 +24,18 @@
     @if (form.controls.title.hasError('required')) {
       <mat-error>Необходимо заполнить название задачи</mat-error>
     }
+
+    @if (form.controls.title.hasError('minLength')) {
+      <mat-error>Минимальное количество символов: 5</mat-error>
+    }
   </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <mat-label>Description</mat-label>
+  <mat-form-field>
+    <mat-label>Описание</mat-label>
     <textarea
       matInput
       formControlName="description"
-      rows="10"
+      rows="12"
       placeholder="Describe your investment strategy"
     ></textarea>
     <mat-icon
