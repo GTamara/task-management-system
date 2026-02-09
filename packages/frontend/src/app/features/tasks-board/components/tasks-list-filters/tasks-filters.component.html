@@ -1,6 +1,9 @@
+@let currentFiltersState = filtersState();
+
 <section class="filters">
   <app-configurable-select
     [config]="STATUS_CONFIG"
+    [value]="currentFiltersState.status"
     labelIcon="filter_list"
     label="Статус"
     aria-label="Фильтр по статусу задачи"
@@ -9,24 +12,31 @@
 
   <app-configurable-select
     [config]="PRIORITY_CONFIG"
+    [value]="currentFiltersState.priority"
     labelIcon="filter_list"
     label="Приоритет"
     aria-label="Фильтр по приоритету задачи"
     (newValueSelected)="newPrioritySelected($event)"
   />
 
-  <app-date-range-filter (dateRangeChanged)="newDateRangeSelected($event)" />
-  <app-search (searchChanged)="searchChanged($event)" />
+  <app-date-range-filter
+    [value]="currentFiltersState.createdAt"
+    (dateRangeChanged)="newDateRangeSelected($event)"
+  />
+  <app-search
+    [value]="currentFiltersState.search"
+    (searchChanged)="searchChanged($event)"
+  />
 </section>
 <div class="actions">
-  <!-- <button
+  <button
     class="reset"
     mat-icon-button
     matTooltip="Сбросить фильтры"
     (click)="resetAllFilters()"
   >
     <mat-icon>restart_alt</mat-icon>
-  </button> -->
+  </button>
 
   <app-sort-menu
     [fields]="SORT_FIELDS"

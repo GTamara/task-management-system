@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OutputRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, OutputRef } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +19,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent {
+
+  value = input<string | null>(null);
+
+  constructor () {
+    effect(() => {
+      this.searchControl.setValue(this.value(), { emitEvent: false });
+    });
+  }
 
   protected searchControl = new FormControl<string>('');
 

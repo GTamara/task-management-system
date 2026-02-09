@@ -4,7 +4,7 @@ import { EPriority, EStatus } from '.';
 export type FiltersState = {
   priority: EPriority | null;
   status: EStatus | null;
-  createdAt: DateRangeValues | null;
+  createdAt: DateRangeValues;
   search: string | null;
 }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OutputRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, OutputRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -27,6 +27,17 @@ type DateRangeFormFroup = FormGroup<{
 export class DateRangeFilterComponent {
 
   private readonly fb = inject(FormBuilder);
+
+  value = input<DateRangeValues>({
+    startDate: null,
+    endDate: null,
+  });
+
+  constructor () {
+    effect(() => {
+      this.rangeForm.patchValue(this.value(), { emitEvent: false });
+    });
+  }
 
   protected readonly rangeForm: DateRangeFormFroup = this.fb.group({
     startDate: this.fb.control<Date | null>(null),

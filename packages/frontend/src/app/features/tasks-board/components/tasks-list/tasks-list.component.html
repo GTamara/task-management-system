@@ -3,6 +3,7 @@
 @let selectedId = selectedTaskId();
 
 <app-tasks-filters
+  [filtersState]="filtersState()"
   (filtersStateChanged)="updateFiltersState($event)"
   (sortStateChanged)="updateSortState($event)"
 />

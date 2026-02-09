@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -13,7 +13,7 @@ import { ConfigurableSelectComponent } from '@lib/components/configurable-select
 import { SortMenuComponent } from '@lib/components/filter-menu/sort-menu.component';
 import { SortState } from '@lib/components/filter-menu/sort-types';
 import { SearchComponent } from '@lib/components/search/search.component';
-
+import { DEFAULT_FILTERS_STATE } from '@features/tasks-board/constants/default-filters-state';
 @Component({
   selector: 'app-tasks-filters',
   imports: [
@@ -40,6 +40,7 @@ export class TasksFiltersComponent {
     direction: 'none',
   } as SortState
 
+  filtersState = input<FiltersState>(DEFAULT_FILTERS_STATE);
   filtersStateChanged = output<Partial<FiltersState>>();
   sortStateChanged = output<SortState>();
 
@@ -48,16 +49,16 @@ export class TasksFiltersComponent {
   ALL_TASK_KEYS = ALL_TASK_KEYS;
   SORT_FIELDS = SORT_FIELDS;
 
-  protected newStatusSelected (status: EStatus | null): void {
+  protected newStatusSelected(status: EStatus | null): void {
     this.filtersStateChanged.emit({ status });
   }
 
-  protected newPrioritySelected (priority: EPriority | null): void {
+  protected newPrioritySelected(priority: EPriority | null): void {
     this.filtersStateChanged.emit({ priority });
   }
 
-  protected resetAllFilters (): void {
-    this.filtersStateChanged.emit({ priority: null, status: null, createdAt: null });
+  protected resetAllFilters(): void {
+    this.filtersStateChanged.emit(DEFAULT_FILTERS_STATE);
   }
 
   protected newDateRangeSelected(evt: Partial<DateRangeValues>): void {

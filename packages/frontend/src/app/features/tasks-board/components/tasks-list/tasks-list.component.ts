@@ -12,6 +12,7 @@ import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
 import { Router } from '@angular/router';
 import { ERoute } from '@routing/types';
 import { TasksViewStateService } from '@features/tasks-board/services/tasks-view-state/tasks-view-state.service';
+import { DEFAULT_FILTERS_STATE } from '@features/tasks-board/constants/default-filters-state';
 @Component({
   selector: 'app-tasks-list',
   imports: [
@@ -45,12 +46,7 @@ export class TasksListComponent {
     })
   }
 
-  private readonly filtersState = signal<FiltersState>({
-    priority: null,
-    status: null,
-    createdAt: null,
-    search: null,
-  });
+  protected readonly filtersState = signal<FiltersState>(DEFAULT_FILTERS_STATE);
 
   protected readonly sortState = signal<SortState>({
     field: {
