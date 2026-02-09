@@ -96,7 +96,53 @@ export class TasksStoreService extends ComponentStore<State> {
         this.getTasks();
       })
     );
-  })
+  });
+
+  readonly editTask = this.effect((id$: Observable<Task['id']>) => id$.pipe(
+    tap(() => {
+      this.updateIsLoading(true);
+    }),
+    switchMap(id => {
+      const formData = this.taskForm.getRawValue();
+      const creationDate = this.selectTaskByIdSignal(id)?.createdAt;
+      const taskData: Partial<Task> = {
+        id,
+        title: formData.title,
+        description: formData.description,
+        createdAt: creationDate,
+        status: formData.status ?? EStatus.NONE,
+        priority: formData.priority ?? EPriority.NONE,
+      };
+      return this.api.updateTask(taskData).pipe(
+      catchError(e => {
+        this.toastService.showError('Ошибка обновления задачи');
+        console.error(e);
+        return of(null);
+      })
+    )}),
+    tap(() => {
+      this.updateIsLoading(false);
+      this.toastService.showSuccess('Задача успешно обновлена');
+      this.getTasks();
+    }),
+  ));
+
+  readonly deleteTask = this.effect((id$: Observable<Task['id']>) => id$.pipe(
+    tap(() => this.updateIsLoading(true)),
+    switchMap(id => this.api.deleteTask(id).pipe(
+      catchError(e => {
+        this.toastService.showError('Ошибка удаления задачи');
+        console.error(e);
+        return of(null);
+      }),
+    )),
+    tap(() => {
+      this.toastService.showSuccess('Задача успешно удалена');
+      this.updateIsLoading(false);
+      this.formService.resetForm();
+      this.getTasks();
+    }),
+  ));
 
   private readonly updateIsLoading = this.updater((state, isLoading: boolean) => {
     return {

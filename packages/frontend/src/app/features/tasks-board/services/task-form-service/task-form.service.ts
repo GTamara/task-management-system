@@ -31,7 +31,7 @@ export class TaskFormService {
       title: '',
       description: '',
       status: null,
-      priority: null
+      priority: null,
     });
     titleControl?.setValidators([Validators.required, Validators.minLength(5)]);
   }

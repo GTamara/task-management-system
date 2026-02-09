@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 import { PRIORITY_CONFIG } from '@features/tasks-board/constants/priority-config';
 import { STATUS_CONFIG } from '@features/tasks-board/constants/status-config';
 import { TasksStoreService } from '@features/tasks-board/services/tasks-store-service/tasks-store.service';
@@ -12,6 +13,7 @@ import { Task } from '@features/tasks-board/types';
 import { TaskFormMode } from '@features/tasks-board/types/task-form';
 import { ConfigurableSelectComponent } from '@lib/components/configurable-select/configurable-select.component';
 import { FormControlValueType } from '@lib/types/form-control-value-type';
+import { ERoute } from '@routing/types';
 @Component({
   selector: 'app-task-form',
   imports: [
@@ -32,6 +34,7 @@ import { FormControlValueType } from '@lib/types/form-control-value-type';
 export class TaskFormComponent {
 
   private readonly store = inject(TasksStoreService);
+  private readonly router = inject(Router);
   protected form = this.store.taskForm;
 
   mode = input<TaskFormMode>();
@@ -109,8 +112,30 @@ export class TaskFormComponent {
     }
   }
 
-  submitForm() {
-    this.store.createTask();
+  protected submitForm() {
+    const mode = this.mode();
+
+    switch (mode) {
+      case 'new':
+        this.store.createTask();
+        break;
+      case 'edit': {
+        const id = this.id();
+        !!id && this.store.editTask(id);
+        break;
+      }
+    }
+
+  }
+
+  protected deleteTask () {
+    const id = this.id();
+    if (!id) return;
+    this.store.deleteTask(id);
+  }
+
+  protected switchOnEditMode () {
+    this.router.navigate([ERoute.TASKS_BOARD, this.id(), 'edit']);
   }
 
   private fillForm(task: Task) {

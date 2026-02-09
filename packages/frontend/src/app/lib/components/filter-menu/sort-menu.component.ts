@@ -30,7 +30,6 @@ export class SortMenuComponent implements OnInit {
   }
 
   protected readonly optionsSignal: Signal<SortOption[]> = computed(() => {
-    console.log('optionsSignal');
     const fields: SortField[] = this.fields();
     const sortState = this.sortState();
     const options = fields.map((field) => ({
@@ -48,7 +47,6 @@ export class SortMenuComponent implements OnInit {
   }
 
   handleChangeSort(field: SortField): void {
-    console.log('handleChangeSort field', field);
     const sort = { ...this.sortState() };
     if (sort.field.code === field.code) {
       // Переключение направления, если поле то же

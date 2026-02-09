@@ -14,16 +14,16 @@ export class TasksApiService {
     return this.apiBaseService.get<Task[]>('tasks');
   }
 
-  createTask(todo: Task): Observable<Task> {
-    return this.apiBaseService.post<Task>('tasks', todo);
+  createTask(item: Task): Observable<Task> {
+    return this.apiBaseService.post<Task>('tasks', item);
   }
 
-  deleteTask(id: number): Observable<void> {
+  deleteTask(id: Task['id']): Observable<void> {
     return this.apiBaseService.delete<void>(`tasks/${id}`);
   }
 
-  updateTask(todo: Partial<Task>): Observable<Partial<Task>> {
-    return this.apiBaseService.patch<Partial<Task>>(`tasks/${todo.id}`, todo);
+  updateTask(item: Partial<Task>): Observable<Partial<Task>> {
+    return this.apiBaseService.patch<Partial<Task>>(`tasks/${item.id}`, item);
   }
 
 }

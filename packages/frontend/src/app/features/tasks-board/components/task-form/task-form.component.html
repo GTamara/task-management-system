@@ -1,10 +1,26 @@
 @let titles = formTitles();
-
+<section class="actions">
+  <button
+    class="edit-btn"
+    mat-icon-button
+    matTooltip="Редактировать задачу"
+    (click)="switchOnEditMode()"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button
+    class="delete-btn"
+    mat-icon-button
+    matTooltip="Удалить задачу"
+    (click)="deleteTask()"
+  >
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+</section>
 <h1 class="form__title">
   <mat-icon>description</mat-icon>
   {{ titles?.formTitle }}
 </h1>
-
 <form
   class="form"
   [formGroup]="form"
